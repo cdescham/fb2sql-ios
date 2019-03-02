@@ -7,10 +7,7 @@
 //
 
 #import "SQLDatabaseApiPlatformStore.h"
-#import "SQLDatabase.h"
-#import "SQLDatabaseSnapshot.h"
-#import "BlockVector.h"
-#import "SQLDatabaseLocalCache.h"
+
 
 
 @implementation SQLDatabaseApiPlatformStore
@@ -23,7 +20,7 @@
 	}
 }
 
--(void) get:(NSString *)table pk:(NSString *)pk geoSearch:(NSString *)geoSearch parameters:(NSString *)parameters okBlock:(void (^)(SQLDatabaseSnapshot *))okBlock koBlock:(void (^)(NSError *))koBlock {
+-(void) get:(NSString *)table pk:(NSString *)pk geoSearch:(NSString *)geoSearch parameters:(NSString *)parameters okBlock:(void (^)(SQLDatabaseSnapshot *))okBlock koBlock:(nullable void (^)(NSError *))koBlock {
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSNumber *seq = self.getSeqNum;
 	NSString *point = nil;
@@ -65,7 +62,7 @@
 			dispatch_async(dispatch_get_main_queue(), ^{
 				if (success)
 					bv.okBlock([[SQLDatabaseSnapshot alloc] initWithDictionary:result]);
-				else
+				else if (bv.koBlock)
 					bv.koBlock(error);
 			});
 		}
@@ -209,14 +206,14 @@
 		[shared.manager setTaskDidReceiveAuthenticationChallengeBlock:^NSURLSessionAuthChallengeDisposition(NSURLSession * _Nonnull session, NSURLSessionTask * _Nonnull task, NSURLAuthenticationChallenge * _Nonnull challenge, NSURLCredential *__autoreleasing  _Nullable * _Nullable credential) {
 			NSString *authenicationMethod = challenge.protectionSpace.authenticationMethod;
 			if ([authenicationMethod isEqualToString:NSURLAuthenticationMethodHTTPDigest]) {
-				if (!shared.digestUser) {
+				if (!SQLDatabase.database.endPoint.authUser) {
 					return NSURLSessionAuthChallengeCancelAuthenticationChallenge;
 				}
-				*credential = [NSURLCredential credentialWithUser:shared.digestUser password:shared.digestPass persistence:NSURLCredentialPersistenceForSession];
+				*credential = [NSURLCredential credentialWithUser:SQLDatabase.database.endPoint.authUser password:SQLDatabase.database.endPoint.authPass persistence:NSURLCredentialPersistenceForSession];
 				return NSURLSessionAuthChallengeUseCredential;
 			}
 			if ([authenicationMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic]) {
-				*credential = [NSURLCredential credentialWithUser:shared.basicUser password:shared.basicPass persistence:NSURLCredentialPersistencePermanent];
+				*credential = [NSURLCredential credentialWithUser:SQLDatabase.database.endPoint.authUser password:SQLDatabase.database.endPoint.authPass persistence:NSURLCredentialPersistencePermanent];
 				return NSURLSessionAuthChallengeUseCredential;
 			}
 			return NSURLSessionAuthChallengeCancelAuthenticationChallenge;

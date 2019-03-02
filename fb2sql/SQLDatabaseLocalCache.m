@@ -45,5 +45,11 @@
 	return shared;
 }
 
+-(void)clear {
+	@synchronized (self.cache) {
+		[self.cache removeAllObjects];
+	}
+}
+
 
 @end

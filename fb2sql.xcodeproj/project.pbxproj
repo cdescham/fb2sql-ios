@@ -21,6 +21,8 @@
 		C62A195A222AE5A4000F51F2 /* BlockVector.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A1958222AE5A4000F51F2 /* BlockVector.m */; };
 		C62A195D222AEB58000F51F2 /* SQLDatabaseLocalCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A195B222AEB58000F51F2 /* SQLDatabaseLocalCache.h */; };
 		C62A195E222AEB58000F51F2 /* SQLDatabaseLocalCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A195C222AEB58000F51F2 /* SQLDatabaseLocalCache.m */; };
+		C62A1965222B0533000F51F2 /* SQLDatabaseReference.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A1963222B0533000F51F2 /* SQLDatabaseReference.h */; };
+		C62A1966222B0533000F51F2 /* SQLDatabaseReference.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A1964222B0533000F51F2 /* SQLDatabaseReference.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		C62A1958222AE5A4000F51F2 /* BlockVector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockVector.m; sourceTree = "<group>"; };
 		C62A195B222AEB58000F51F2 /* SQLDatabaseLocalCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLDatabaseLocalCache.h; sourceTree = "<group>"; };
 		C62A195C222AEB58000F51F2 /* SQLDatabaseLocalCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseLocalCache.m; sourceTree = "<group>"; };
+		C62A1963222B0533000F51F2 /* SQLDatabaseReference.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLDatabaseReference.h; sourceTree = "<group>"; };
+		C62A1964222B0533000F51F2 /* SQLDatabaseReference.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseReference.m; sourceTree = "<group>"; };
 		D6EF8D3DF8973E0B3765AE1D /* libPods-fb2sql.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fb2sql.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -99,6 +103,8 @@
 				C62A1958222AE5A4000F51F2 /* BlockVector.m */,
 				C62A195B222AEB58000F51F2 /* SQLDatabaseLocalCache.h */,
 				C62A195C222AEB58000F51F2 /* SQLDatabaseLocalCache.m */,
+				C62A1963222B0533000F51F2 /* SQLDatabaseReference.h */,
+				C62A1964222B0533000F51F2 /* SQLDatabaseReference.m */,
 			);
 			path = fb2sql;
 			sourceTree = "<group>";
@@ -119,6 +125,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C62A1965222B0533000F51F2 /* SQLDatabaseReference.h in Headers */,
 				C62A1951222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.h in Headers */,
 				C62A1955222A74F4000F51F2 /* SQLDatabaseSnapshot.h in Headers */,
 				C62A194D222977C8000F51F2 /* SQLDatabaseEndPoint.h in Headers */,
@@ -225,6 +232,7 @@
 				C62A1952222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.m in Sources */,
 				C62A195A222AE5A4000F51F2 /* BlockVector.m in Sources */,
 				C62A195E222AEB58000F51F2 /* SQLDatabaseLocalCache.m in Sources */,
+				C62A1966222B0533000F51F2 /* SQLDatabaseReference.m in Sources */,
 				C62A1956222A74F4000F51F2 /* SQLDatabaseSnapshot.m in Sources */,
 				C62A194E222977C8000F51F2 /* SQLDatabaseEndPoint.m in Sources */,
 				C62A194A22294A65000F51F2 /* SQLDatabase.m in Sources */,

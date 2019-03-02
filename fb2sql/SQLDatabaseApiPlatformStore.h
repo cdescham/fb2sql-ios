@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "AFHTTPSessionManager.h"
-
+#import "SQLDatabase.h"
+#import "SQLDatabaseSnapshot.h"
+#import "BlockVector.h"
+#import "SQLDatabaseLocalCache.h"
 
 #define MEDIA_TYPE @"application/ld+json"
 #define ENCODING @"utf-8"
@@ -19,11 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property NSNumber *seqNum;
 @property AFHTTPSessionManager *manager ;
-@property NSString *digestUser;
-@property NSString *digestPass;
-@property NSString *basicUser;
-@property NSString *basicPass;
 @property NSMutableDictionary *blocksQueueForOngoingRequests;
+
++(SQLDatabaseApiPlatformStore *)sharedManager;
+-(void) get:(NSString *)table pk:(NSString *)pk geoSearch:(NSString *)geoSearch parameters:(NSString *)parameters okBlock:(void (^)(SQLDatabaseSnapshot *))okBlock koBlock:(nullable void (^)(NSError *))koBlock;
 
 @end
 

@@ -15,13 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString * authUser;
 @property NSString * authPass;
 @property NSString * authToken;
-@property int connectionTimeout;
-@property int readTimeout;
-@property int writeTimeout;
-@property int connectionPoolMaxIdleConnections;
-@property int connectionPoolKeepAliveDuration;
-@property BOOL httpCacheEnabled;
-@property int httpCacheSizeMb;
 @property int localcacheTTL;
 @property BOOL localCacheEnabled;
 @property int retryTimeOut; // Time between retries for reading.

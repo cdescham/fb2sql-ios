@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (SQLDatabaseLocalCache *) instance;
 -(NSDictionary *) get:(NSString *)key ttl:(int)ttl;
 -(void) put:(NSString *)key value:(NSDictionary *)jsonDict;
+-(void)clear;
 
 @end
 
