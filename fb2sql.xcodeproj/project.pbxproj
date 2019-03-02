@@ -1,0 +1,429 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C167F73EF6508717F0DF3335 /* libPods-fb2sql.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6EF8D3DF8973E0B3765AE1D /* libPods-fb2sql.a */; };
+		C62A1941222947FD000F51F2 /* fb2sql.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A193F222947FD000F51F2 /* fb2sql.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C62A194922294A65000F51F2 /* SQLDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A194722294A65000F51F2 /* SQLDatabase.h */; };
+		C62A194A22294A65000F51F2 /* SQLDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A194822294A65000F51F2 /* SQLDatabase.m */; };
+		C62A194D222977C8000F51F2 /* SQLDatabaseEndPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A194B222977C8000F51F2 /* SQLDatabaseEndPoint.h */; };
+		C62A194E222977C8000F51F2 /* SQLDatabaseEndPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A194C222977C8000F51F2 /* SQLDatabaseEndPoint.m */; };
+		C62A1951222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A194F222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.h */; };
+		C62A1952222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A1950222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.m */; };
+		C62A1955222A74F4000F51F2 /* SQLDatabaseSnapshot.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A1953222A74F4000F51F2 /* SQLDatabaseSnapshot.h */; };
+		C62A1956222A74F4000F51F2 /* SQLDatabaseSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A1954222A74F4000F51F2 /* SQLDatabaseSnapshot.m */; };
+		C62A1959222AE5A4000F51F2 /* BlockVector.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A1957222AE5A4000F51F2 /* BlockVector.h */; };
+		C62A195A222AE5A4000F51F2 /* BlockVector.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A1958222AE5A4000F51F2 /* BlockVector.m */; };
+		C62A195D222AEB58000F51F2 /* SQLDatabaseLocalCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A195B222AEB58000F51F2 /* SQLDatabaseLocalCache.h */; };
+		C62A195E222AEB58000F51F2 /* SQLDatabaseLocalCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A195C222AEB58000F51F2 /* SQLDatabaseLocalCache.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7B522B00CE2DAEBE91B3F195 /* Pods-fb2sql.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fb2sql.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fb2sql/Pods-fb2sql.debug.xcconfig"; sourceTree = "<group>"; };
+		8546BABF99E1CECAB27D3FBD /* Pods-fb2sql.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fb2sql.release.xcconfig"; path = "Pods/Target Support Files/Pods-fb2sql/Pods-fb2sql.release.xcconfig"; sourceTree = "<group>"; };
+		C62A193C222947FD000F51F2 /* fb2sql.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = fb2sql.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C62A193F222947FD000F51F2 /* fb2sql.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fb2sql.h; sourceTree = "<group>"; };
+		C62A1940222947FD000F51F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C62A194722294A65000F51F2 /* SQLDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLDatabase.h; sourceTree = "<group>"; };
+		C62A194822294A65000F51F2 /* SQLDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLDatabase.m; sourceTree = "<group>"; };
+		C62A194B222977C8000F51F2 /* SQLDatabaseEndPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLDatabaseEndPoint.h; sourceTree = "<group>"; };
+		C62A194C222977C8000F51F2 /* SQLDatabaseEndPoint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseEndPoint.m; sourceTree = "<group>"; };
+		C62A194F222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLDatabaseApiPlatformStore.h; sourceTree = "<group>"; };
+		C62A1950222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseApiPlatformStore.m; sourceTree = "<group>"; };
+		C62A1953222A74F4000F51F2 /* SQLDatabaseSnapshot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLDatabaseSnapshot.h; sourceTree = "<group>"; };
+		C62A1954222A74F4000F51F2 /* SQLDatabaseSnapshot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseSnapshot.m; sourceTree = "<group>"; };
+		C62A1957222AE5A4000F51F2 /* BlockVector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockVector.h; sourceTree = "<group>"; };
+		C62A1958222AE5A4000F51F2 /* BlockVector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockVector.m; sourceTree = "<group>"; };
+		C62A195B222AEB58000F51F2 /* SQLDatabaseLocalCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLDatabaseLocalCache.h; sourceTree = "<group>"; };
+		C62A195C222AEB58000F51F2 /* SQLDatabaseLocalCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseLocalCache.m; sourceTree = "<group>"; };
+		D6EF8D3DF8973E0B3765AE1D /* libPods-fb2sql.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fb2sql.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C62A1939222947FD000F51F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C167F73EF6508717F0DF3335 /* libPods-fb2sql.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		108CC832672A405DC529A66D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6EF8D3DF8973E0B3765AE1D /* libPods-fb2sql.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C62A1932222947FD000F51F2 = {
+			isa = PBXGroup;
+			children = (
+				C62A193E222947FD000F51F2 /* fb2sql */,
+				C62A193D222947FD000F51F2 /* Products */,
+				E8C930CE4A403918B0E26508 /* Pods */,
+				108CC832672A405DC529A66D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C62A193D222947FD000F51F2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C62A193C222947FD000F51F2 /* fb2sql.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C62A193E222947FD000F51F2 /* fb2sql */ = {
+			isa = PBXGroup;
+			children = (
+				C62A193F222947FD000F51F2 /* fb2sql.h */,
+				C62A1940222947FD000F51F2 /* Info.plist */,
+				C62A194722294A65000F51F2 /* SQLDatabase.h */,
+				C62A194822294A65000F51F2 /* SQLDatabase.m */,
+				C62A194B222977C8000F51F2 /* SQLDatabaseEndPoint.h */,
+				C62A194C222977C8000F51F2 /* SQLDatabaseEndPoint.m */,
+				C62A194F222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.h */,
+				C62A1950222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.m */,
+				C62A1953222A74F4000F51F2 /* SQLDatabaseSnapshot.h */,
+				C62A1954222A74F4000F51F2 /* SQLDatabaseSnapshot.m */,
+				C62A1957222AE5A4000F51F2 /* BlockVector.h */,
+				C62A1958222AE5A4000F51F2 /* BlockVector.m */,
+				C62A195B222AEB58000F51F2 /* SQLDatabaseLocalCache.h */,
+				C62A195C222AEB58000F51F2 /* SQLDatabaseLocalCache.m */,
+			);
+			path = fb2sql;
+			sourceTree = "<group>";
+		};
+		E8C930CE4A403918B0E26508 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7B522B00CE2DAEBE91B3F195 /* Pods-fb2sql.debug.xcconfig */,
+				8546BABF99E1CECAB27D3FBD /* Pods-fb2sql.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		C62A1937222947FD000F51F2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C62A1951222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.h in Headers */,
+				C62A1955222A74F4000F51F2 /* SQLDatabaseSnapshot.h in Headers */,
+				C62A194D222977C8000F51F2 /* SQLDatabaseEndPoint.h in Headers */,
+				C62A194922294A65000F51F2 /* SQLDatabase.h in Headers */,
+				C62A1941222947FD000F51F2 /* fb2sql.h in Headers */,
+				C62A1959222AE5A4000F51F2 /* BlockVector.h in Headers */,
+				C62A195D222AEB58000F51F2 /* SQLDatabaseLocalCache.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C62A193B222947FD000F51F2 /* fb2sql */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C62A1944222947FD000F51F2 /* Build configuration list for PBXNativeTarget "fb2sql" */;
+			buildPhases = (
+				2ABBE1C1640B9E8A35E5F953 /* [CP] Check Pods Manifest.lock */,
+				C62A1937222947FD000F51F2 /* Headers */,
+				C62A1938222947FD000F51F2 /* Sources */,
+				C62A1939222947FD000F51F2 /* Frameworks */,
+				C62A193A222947FD000F51F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = fb2sql;
+			productName = fb2sql;
+			productReference = C62A193C222947FD000F51F2 /* fb2sql.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C62A1933222947FD000F51F2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Inventivelink;
+				TargetAttributes = {
+					C62A193B222947FD000F51F2 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = C62A1936222947FD000F51F2 /* Build configuration list for PBXProject "fb2sql" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C62A1932222947FD000F51F2;
+			productRefGroup = C62A193D222947FD000F51F2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C62A193B222947FD000F51F2 /* fb2sql */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C62A193A222947FD000F51F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2ABBE1C1640B9E8A35E5F953 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-fb2sql-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C62A1938222947FD000F51F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C62A1952222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.m in Sources */,
+				C62A195A222AE5A4000F51F2 /* BlockVector.m in Sources */,
+				C62A195E222AEB58000F51F2 /* SQLDatabaseLocalCache.m in Sources */,
+				C62A1956222A74F4000F51F2 /* SQLDatabaseSnapshot.m in Sources */,
+				C62A194E222977C8000F51F2 /* SQLDatabaseEndPoint.m in Sources */,
+				C62A194A22294A65000F51F2 /* SQLDatabase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C62A1942222947FD000F51F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C62A1943222947FD000F51F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C62A1945222947FD000F51F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B522B00CE2DAEBE91B3F195 /* Pods-fb2sql.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DY7GE5XGWL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = fb2sql/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.inventivelink.fb2sql.fb2sql;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C62A1946222947FD000F51F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8546BABF99E1CECAB27D3FBD /* Pods-fb2sql.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DY7GE5XGWL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = fb2sql/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.inventivelink.fb2sql.fb2sql;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C62A1936222947FD000F51F2 /* Build configuration list for PBXProject "fb2sql" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C62A1942222947FD000F51F2 /* Debug */,
+				C62A1943222947FD000F51F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C62A1944222947FD000F51F2 /* Build configuration list for PBXNativeTarget "fb2sql" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C62A1945222947FD000F51F2 /* Debug */,
+				C62A1946222947FD000F51F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C62A1933222947FD000F51F2 /* Project object */;
+}
