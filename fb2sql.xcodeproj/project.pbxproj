@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C167F73EF6508717F0DF3335 /* libPods-fb2sql.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6EF8D3DF8973E0B3765AE1D /* libPods-fb2sql.a */; };
+		C61075C8222D354E00DA6168 /* SQLDatabaseNormaliser.h in Headers */ = {isa = PBXBuildFile; fileRef = C61075C6222D354E00DA6168 /* SQLDatabaseNormaliser.h */; };
 		C62A1941222947FD000F51F2 /* fb2sql.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A193F222947FD000F51F2 /* fb2sql.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C62A194922294A65000F51F2 /* SQLDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A194722294A65000F51F2 /* SQLDatabase.h */; };
 		C62A194A22294A65000F51F2 /* SQLDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A194822294A65000F51F2 /* SQLDatabase.m */; };
@@ -23,11 +24,37 @@
 		C62A195E222AEB58000F51F2 /* SQLDatabaseLocalCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A195C222AEB58000F51F2 /* SQLDatabaseLocalCache.m */; };
 		C62A1965222B0533000F51F2 /* SQLDatabaseReference.h in Headers */ = {isa = PBXBuildFile; fileRef = C62A1963222B0533000F51F2 /* SQLDatabaseReference.h */; };
 		C62A1966222B0533000F51F2 /* SQLDatabaseReference.m in Sources */ = {isa = PBXBuildFile; fileRef = C62A1964222B0533000F51F2 /* SQLDatabaseReference.m */; };
+		C6DAEDEF222D8D5200BBE1B7 /* SQLJSONCommonNormalizer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEDED222D8D5200BBE1B7 /* SQLJSONCommonNormalizer.h */; };
+		C6DAEDF0222D8D5200BBE1B7 /* SQLJSONCommonNormalizer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEDEE222D8D5200BBE1B7 /* SQLJSONCommonNormalizer.m */; };
+		C6DAEDF2222D8D8100BBE1B7 /* SQLDatabaseNormaliser.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEDF1222D8D8100BBE1B7 /* SQLDatabaseNormaliser.m */; };
+		C6DAEDF5222D8DF300BBE1B7 /* SQLJSONTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEDF3222D8DF200BBE1B7 /* SQLJSONTransformer.h */; };
+		C6DAEDF6222D8DF300BBE1B7 /* SQLJSONTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEDF4222D8DF200BBE1B7 /* SQLJSONTransformer.m */; };
+		C6DAEDF9222D8EDB00BBE1B7 /* SQLJSONHashListToStringListTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEDF7222D8EDB00BBE1B7 /* SQLJSONHashListToStringListTransformer.h */; };
+		C6DAEDFA222D8EDB00BBE1B7 /* SQLJSONHashListToStringListTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEDF8222D8EDB00BBE1B7 /* SQLJSONHashListToStringListTransformer.m */; };
+		C6DAEDFD222D936100BBE1B7 /* SQLJSONHashToListTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEDFB222D936100BBE1B7 /* SQLJSONHashToListTransformer.h */; };
+		C6DAEDFE222D936100BBE1B7 /* SQLJSONHashToListTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEDFC222D936100BBE1B7 /* SQLJSONHashToListTransformer.m */; };
+		C6DAEE01222D95E300BBE1B7 /* SQLJSONIRIBuilderTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEDFF222D95E300BBE1B7 /* SQLJSONIRIBuilderTransformer.h */; };
+		C6DAEE02222D95E300BBE1B7 /* SQLJSONIRIBuilderTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEE00222D95E300BBE1B7 /* SQLJSONIRIBuilderTransformer.m */; };
+		C6DAEE05222D96E000BBE1B7 /* SQLJSONListExpanderTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEE03222D96E000BBE1B7 /* SQLJSONListExpanderTransformer.h */; };
+		C6DAEE06222D96E000BBE1B7 /* SQLJSONListExpanderTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEE04222D96E000BBE1B7 /* SQLJSONListExpanderTransformer.m */; };
+		C6DAEE09222D98F500BBE1B7 /* SQLJSONListToHashTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEE07222D98F500BBE1B7 /* SQLJSONListToHashTransformer.h */; };
+		C6DAEE0A222D98F500BBE1B7 /* SQLJSONListToHashTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEE08222D98F500BBE1B7 /* SQLJSONListToHashTransformer.m */; };
+		C6DAEE0D222D99CB00BBE1B7 /* SQLJSONListToPropertiesTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEE0B222D99CB00BBE1B7 /* SQLJSONListToPropertiesTransformer.h */; };
+		C6DAEE0E222D99CB00BBE1B7 /* SQLJSONListToPropertiesTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEE0C222D99CB00BBE1B7 /* SQLJSONListToPropertiesTransformer.m */; };
+		C6DAEE11222D9ABF00BBE1B7 /* SQLJSONNameMapperTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEE0F222D9ABF00BBE1B7 /* SQLJSONNameMapperTransformer.h */; };
+		C6DAEE12222D9ABF00BBE1B7 /* SQLJSONNameMapperTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEE10222D9ABF00BBE1B7 /* SQLJSONNameMapperTransformer.m */; };
+		C6DAEE15222D9B7100BBE1B7 /* SQLJSONPropertiesToListTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEE13222D9B7100BBE1B7 /* SQLJSONPropertiesToListTransformer.h */; };
+		C6DAEE16222D9B7100BBE1B7 /* SQLJSONPropertiesToListTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEE14222D9B7100BBE1B7 /* SQLJSONPropertiesToListTransformer.m */; };
+		C6DAEE19222D9C5300BBE1B7 /* SQLJSONRemovePropertyTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEE17222D9C5300BBE1B7 /* SQLJSONRemovePropertyTransformer.h */; };
+		C6DAEE1A222D9C5300BBE1B7 /* SQLJSONRemovePropertyTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEE18222D9C5300BBE1B7 /* SQLJSONRemovePropertyTransformer.m */; };
+		C6DAEE1D222D9CB900BBE1B7 /* SQLJSONStringListToHashListTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DAEE1B222D9CB900BBE1B7 /* SQLJSONStringListToHashListTransformer.h */; };
+		C6DAEE1E222D9CB900BBE1B7 /* SQLJSONStringListToHashListTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C6DAEE1C222D9CB900BBE1B7 /* SQLJSONStringListToHashListTransformer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7B522B00CE2DAEBE91B3F195 /* Pods-fb2sql.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fb2sql.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fb2sql/Pods-fb2sql.debug.xcconfig"; sourceTree = "<group>"; };
 		8546BABF99E1CECAB27D3FBD /* Pods-fb2sql.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fb2sql.release.xcconfig"; path = "Pods/Target Support Files/Pods-fb2sql/Pods-fb2sql.release.xcconfig"; sourceTree = "<group>"; };
+		C61075C6222D354E00DA6168 /* SQLDatabaseNormaliser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLDatabaseNormaliser.h; sourceTree = "<group>"; };
 		C62A193C222947FD000F51F2 /* fb2sql.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = fb2sql.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62A193F222947FD000F51F2 /* fb2sql.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fb2sql.h; sourceTree = "<group>"; };
 		C62A1940222947FD000F51F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +72,31 @@
 		C62A195C222AEB58000F51F2 /* SQLDatabaseLocalCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseLocalCache.m; sourceTree = "<group>"; };
 		C62A1963222B0533000F51F2 /* SQLDatabaseReference.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLDatabaseReference.h; sourceTree = "<group>"; };
 		C62A1964222B0533000F51F2 /* SQLDatabaseReference.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseReference.m; sourceTree = "<group>"; };
+		C6DAEDED222D8D5200BBE1B7 /* SQLJSONCommonNormalizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONCommonNormalizer.h; sourceTree = "<group>"; };
+		C6DAEDEE222D8D5200BBE1B7 /* SQLJSONCommonNormalizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONCommonNormalizer.m; sourceTree = "<group>"; };
+		C6DAEDF1222D8D8100BBE1B7 /* SQLDatabaseNormaliser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseNormaliser.m; sourceTree = "<group>"; };
+		C6DAEDF3222D8DF200BBE1B7 /* SQLJSONTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONTransformer.h; sourceTree = "<group>"; };
+		C6DAEDF4222D8DF200BBE1B7 /* SQLJSONTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONTransformer.m; sourceTree = "<group>"; };
+		C6DAEDF7222D8EDB00BBE1B7 /* SQLJSONHashListToStringListTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONHashListToStringListTransformer.h; sourceTree = "<group>"; };
+		C6DAEDF8222D8EDB00BBE1B7 /* SQLJSONHashListToStringListTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONHashListToStringListTransformer.m; sourceTree = "<group>"; };
+		C6DAEDFB222D936100BBE1B7 /* SQLJSONHashToListTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONHashToListTransformer.h; sourceTree = "<group>"; };
+		C6DAEDFC222D936100BBE1B7 /* SQLJSONHashToListTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONHashToListTransformer.m; sourceTree = "<group>"; };
+		C6DAEDFF222D95E300BBE1B7 /* SQLJSONIRIBuilderTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONIRIBuilderTransformer.h; sourceTree = "<group>"; };
+		C6DAEE00222D95E300BBE1B7 /* SQLJSONIRIBuilderTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONIRIBuilderTransformer.m; sourceTree = "<group>"; };
+		C6DAEE03222D96E000BBE1B7 /* SQLJSONListExpanderTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONListExpanderTransformer.h; sourceTree = "<group>"; };
+		C6DAEE04222D96E000BBE1B7 /* SQLJSONListExpanderTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONListExpanderTransformer.m; sourceTree = "<group>"; };
+		C6DAEE07222D98F500BBE1B7 /* SQLJSONListToHashTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONListToHashTransformer.h; sourceTree = "<group>"; };
+		C6DAEE08222D98F500BBE1B7 /* SQLJSONListToHashTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONListToHashTransformer.m; sourceTree = "<group>"; };
+		C6DAEE0B222D99CB00BBE1B7 /* SQLJSONListToPropertiesTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONListToPropertiesTransformer.h; sourceTree = "<group>"; };
+		C6DAEE0C222D99CB00BBE1B7 /* SQLJSONListToPropertiesTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONListToPropertiesTransformer.m; sourceTree = "<group>"; };
+		C6DAEE0F222D9ABF00BBE1B7 /* SQLJSONNameMapperTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONNameMapperTransformer.h; sourceTree = "<group>"; };
+		C6DAEE10222D9ABF00BBE1B7 /* SQLJSONNameMapperTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONNameMapperTransformer.m; sourceTree = "<group>"; };
+		C6DAEE13222D9B7100BBE1B7 /* SQLJSONPropertiesToListTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONPropertiesToListTransformer.h; sourceTree = "<group>"; };
+		C6DAEE14222D9B7100BBE1B7 /* SQLJSONPropertiesToListTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONPropertiesToListTransformer.m; sourceTree = "<group>"; };
+		C6DAEE17222D9C5300BBE1B7 /* SQLJSONRemovePropertyTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONRemovePropertyTransformer.h; sourceTree = "<group>"; };
+		C6DAEE18222D9C5300BBE1B7 /* SQLJSONRemovePropertyTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONRemovePropertyTransformer.m; sourceTree = "<group>"; };
+		C6DAEE1B222D9CB900BBE1B7 /* SQLJSONStringListToHashListTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLJSONStringListToHashListTransformer.h; sourceTree = "<group>"; };
+		C6DAEE1C222D9CB900BBE1B7 /* SQLJSONStringListToHashListTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLJSONStringListToHashListTransformer.m; sourceTree = "<group>"; };
 		D6EF8D3DF8973E0B3765AE1D /* libPods-fb2sql.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fb2sql.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -105,6 +157,32 @@
 				C62A195C222AEB58000F51F2 /* SQLDatabaseLocalCache.m */,
 				C62A1963222B0533000F51F2 /* SQLDatabaseReference.h */,
 				C62A1964222B0533000F51F2 /* SQLDatabaseReference.m */,
+				C61075C6222D354E00DA6168 /* SQLDatabaseNormaliser.h */,
+				C6DAEDF1222D8D8100BBE1B7 /* SQLDatabaseNormaliser.m */,
+				C6DAEDF3222D8DF200BBE1B7 /* SQLJSONTransformer.h */,
+				C6DAEDF4222D8DF200BBE1B7 /* SQLJSONTransformer.m */,
+				C6DAEDED222D8D5200BBE1B7 /* SQLJSONCommonNormalizer.h */,
+				C6DAEDEE222D8D5200BBE1B7 /* SQLJSONCommonNormalizer.m */,
+				C6DAEDF7222D8EDB00BBE1B7 /* SQLJSONHashListToStringListTransformer.h */,
+				C6DAEDF8222D8EDB00BBE1B7 /* SQLJSONHashListToStringListTransformer.m */,
+				C6DAEDFB222D936100BBE1B7 /* SQLJSONHashToListTransformer.h */,
+				C6DAEDFC222D936100BBE1B7 /* SQLJSONHashToListTransformer.m */,
+				C6DAEDFF222D95E300BBE1B7 /* SQLJSONIRIBuilderTransformer.h */,
+				C6DAEE00222D95E300BBE1B7 /* SQLJSONIRIBuilderTransformer.m */,
+				C6DAEE03222D96E000BBE1B7 /* SQLJSONListExpanderTransformer.h */,
+				C6DAEE04222D96E000BBE1B7 /* SQLJSONListExpanderTransformer.m */,
+				C6DAEE07222D98F500BBE1B7 /* SQLJSONListToHashTransformer.h */,
+				C6DAEE08222D98F500BBE1B7 /* SQLJSONListToHashTransformer.m */,
+				C6DAEE0B222D99CB00BBE1B7 /* SQLJSONListToPropertiesTransformer.h */,
+				C6DAEE0C222D99CB00BBE1B7 /* SQLJSONListToPropertiesTransformer.m */,
+				C6DAEE0F222D9ABF00BBE1B7 /* SQLJSONNameMapperTransformer.h */,
+				C6DAEE10222D9ABF00BBE1B7 /* SQLJSONNameMapperTransformer.m */,
+				C6DAEE13222D9B7100BBE1B7 /* SQLJSONPropertiesToListTransformer.h */,
+				C6DAEE14222D9B7100BBE1B7 /* SQLJSONPropertiesToListTransformer.m */,
+				C6DAEE17222D9C5300BBE1B7 /* SQLJSONRemovePropertyTransformer.h */,
+				C6DAEE18222D9C5300BBE1B7 /* SQLJSONRemovePropertyTransformer.m */,
+				C6DAEE1B222D9CB900BBE1B7 /* SQLJSONStringListToHashListTransformer.h */,
+				C6DAEE1C222D9CB900BBE1B7 /* SQLJSONStringListToHashListTransformer.m */,
 			);
 			path = fb2sql;
 			sourceTree = "<group>";
@@ -125,14 +203,27 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6DAEE19222D9C5300BBE1B7 /* SQLJSONRemovePropertyTransformer.h in Headers */,
 				C62A1965222B0533000F51F2 /* SQLDatabaseReference.h in Headers */,
+				C6DAEDFD222D936100BBE1B7 /* SQLJSONHashToListTransformer.h in Headers */,
 				C62A1951222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.h in Headers */,
 				C62A1955222A74F4000F51F2 /* SQLDatabaseSnapshot.h in Headers */,
+				C6DAEE15222D9B7100BBE1B7 /* SQLJSONPropertiesToListTransformer.h in Headers */,
+				C6DAEE09222D98F500BBE1B7 /* SQLJSONListToHashTransformer.h in Headers */,
+				C6DAEE0D222D99CB00BBE1B7 /* SQLJSONListToPropertiesTransformer.h in Headers */,
+				C6DAEE01222D95E300BBE1B7 /* SQLJSONIRIBuilderTransformer.h in Headers */,
+				C6DAEE11222D9ABF00BBE1B7 /* SQLJSONNameMapperTransformer.h in Headers */,
 				C62A194D222977C8000F51F2 /* SQLDatabaseEndPoint.h in Headers */,
 				C62A194922294A65000F51F2 /* SQLDatabase.h in Headers */,
 				C62A1941222947FD000F51F2 /* fb2sql.h in Headers */,
 				C62A1959222AE5A4000F51F2 /* BlockVector.h in Headers */,
+				C6DAEDEF222D8D5200BBE1B7 /* SQLJSONCommonNormalizer.h in Headers */,
 				C62A195D222AEB58000F51F2 /* SQLDatabaseLocalCache.h in Headers */,
+				C6DAEE1D222D9CB900BBE1B7 /* SQLJSONStringListToHashListTransformer.h in Headers */,
+				C6DAEDF9222D8EDB00BBE1B7 /* SQLJSONHashListToStringListTransformer.h in Headers */,
+				C61075C8222D354E00DA6168 /* SQLDatabaseNormaliser.h in Headers */,
+				C6DAEE05222D96E000BBE1B7 /* SQLJSONListExpanderTransformer.h in Headers */,
+				C6DAEDF5222D8DF300BBE1B7 /* SQLJSONTransformer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,13 +320,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6DAEE12222D9ABF00BBE1B7 /* SQLJSONNameMapperTransformer.m in Sources */,
+				C6DAEE0A222D98F500BBE1B7 /* SQLJSONListToHashTransformer.m in Sources */,
+				C6DAEE16222D9B7100BBE1B7 /* SQLJSONPropertiesToListTransformer.m in Sources */,
+				C6DAEDF6222D8DF300BBE1B7 /* SQLJSONTransformer.m in Sources */,
+				C6DAEDF0222D8D5200BBE1B7 /* SQLJSONCommonNormalizer.m in Sources */,
 				C62A1952222A6AE3000F51F2 /* SQLDatabaseApiPlatformStore.m in Sources */,
+				C6DAEDFA222D8EDB00BBE1B7 /* SQLJSONHashListToStringListTransformer.m in Sources */,
 				C62A195A222AE5A4000F51F2 /* BlockVector.m in Sources */,
 				C62A195E222AEB58000F51F2 /* SQLDatabaseLocalCache.m in Sources */,
 				C62A1966222B0533000F51F2 /* SQLDatabaseReference.m in Sources */,
+				C6DAEE0E222D99CB00BBE1B7 /* SQLJSONListToPropertiesTransformer.m in Sources */,
+				C6DAEE1A222D9C5300BBE1B7 /* SQLJSONRemovePropertyTransformer.m in Sources */,
 				C62A1956222A74F4000F51F2 /* SQLDatabaseSnapshot.m in Sources */,
 				C62A194E222977C8000F51F2 /* SQLDatabaseEndPoint.m in Sources */,
+				C6DAEDFE222D936100BBE1B7 /* SQLJSONHashToListTransformer.m in Sources */,
 				C62A194A22294A65000F51F2 /* SQLDatabase.m in Sources */,
+				C6DAEE02222D95E300BBE1B7 /* SQLJSONIRIBuilderTransformer.m in Sources */,
+				C6DAEE06222D96E000BBE1B7 /* SQLJSONListExpanderTransformer.m in Sources */,
+				C6DAEE1E222D9CB900BBE1B7 /* SQLJSONStringListToHashListTransformer.m in Sources */,
+				C6DAEDF2222D8D8100BBE1B7 /* SQLDatabaseNormaliser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
