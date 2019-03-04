@@ -31,6 +31,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'fb2sql-ios/Classes/**/*'
+  s.exclude_files = "fb2sql-ios/Classes/Info.plist"
   
   # s.resource_bundles = {
   #   'fb2sql-ios' => ['fb2sql-ios/Assets/*.png']
