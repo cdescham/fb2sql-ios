@@ -1,0 +1,27 @@
+{
+  "name": "fb2sql-ios",
+  "version": "0.1.0",
+  "summary": "A short description of fb2sql-ios.",
+  "description": "Firebase to Mysql wrapper",
+  "homepage": "https://github.com/cdescham/fb2sql-ios",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "cdescham": "christophe.deschamps.work@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/cdescham/fb2sql-ios.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "fb2sql-ios/Classes/**/*",
+  "dependencies": {
+    "AFNetworking": [
+      "~> 2.7"
+    ]
+  }
+}
