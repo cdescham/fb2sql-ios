@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'fb2sql-ios'
   s.version          = '0.1.1'
-  s.summary          = 'A short description of fb2sql-ios.'
+  s.summary          = 'Firebase like Wrapper for api-platform.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,20 +18,20 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-   Firebase to Mysql wrapper
-  DESC
+	Firebase like Wrapper for api-platform for FB to SQL Migration.
+	DESC
 
-  s.homepage         = 'https://github.com/cdescham/fb2sql-ios'
+  s.homepage         = 'https://github.com'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'cdescham' => 'christophe.deschamps.work@gmail.com' }
-  s.source           = { :git => 'https://github.com/cdescham/fb2sql-ios.git', :tag => '0.1.1' }
+  s.author           = { 'Christophe Deschamps' => 'christophe.deschamps.work@gmail.com' }
+  s.source           = { :git => 'https://github.com/cdescham/fb2sql-ios.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'fb2sql-ios/Classes/**/*'
-  s.exclude_files = 'fb2sql-ios/Classes/Info.plist'
+  s.source_files = 'fb2sql-ios-src/Classes/*'
+  s.exclude_files = 'fb2sql-ios-src/Classes/Info.plist'
   
   # s.resource_bundles = {
   #   'fb2sql-ios' => ['fb2sql-ios/Assets/*.png']
