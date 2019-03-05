@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'fb2sql-ios'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'Firebase like Wrapper for api-platform.'
 
 # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'fb2sql-ios-src/Classes/*'
+  s.source_files = 'fb2sql-ios-src/Classes/*.{h,m}'
   s.exclude_files = 'fb2sql-ios-src/Classes/Info.plist'
   
   # s.resource_bundles = {
