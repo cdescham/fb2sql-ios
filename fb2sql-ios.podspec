@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'fb2sql-ios'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A short description of fb2sql-ios.'
 
 # This description is used to generate tags and improve search results.
@@ -25,13 +25,13 @@ Pod::Spec.new do |s|
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'cdescham' => 'christophe.deschamps.work@gmail.com' }
-  s.source           = { :git => 'https://github.com/cdescham/fb2sql-ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/cdescham/fb2sql-ios.git', :tag => '0.1.1' }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'fb2sql-ios/Classes/**/*'
-  s.exclude_files = "fb2sql-ios/Classes/Info.plist"
+  s.exclude_files = 'fb2sql-ios/Classes/Info.plist'
   
   # s.resource_bundles = {
   #   'fb2sql-ios' => ['fb2sql-ios/Assets/*.png']
