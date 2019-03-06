@@ -32,6 +32,6 @@
 #import "SQLJSONStringListToHashListTransformer.h"
 #import "SQLJSONTransformer.h"
 
-FOUNDATION_EXPORT double fb2sql_iosVersionNumber;
-FOUNDATION_EXPORT const unsigned char fb2sql_iosVersionString[];
+FOUNDATION_EXPORT double SQLDatabaseVersionNumber;
+FOUNDATION_EXPORT const unsigned char SQLDatabaseVersionString[];
 

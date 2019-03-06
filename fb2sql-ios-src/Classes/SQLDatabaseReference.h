@@ -22,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property  NSString *pivotfield;
 
 - (void)observeSingleEvenWithBlock:(void (^)(SQLDatabaseSnapshot *snapshot))block;
-
+-(SQLDatabaseReference *) child:(NSString *)label;
+-(SQLDatabaseReference *) reference:(NSString *)table;
 
 @end
 

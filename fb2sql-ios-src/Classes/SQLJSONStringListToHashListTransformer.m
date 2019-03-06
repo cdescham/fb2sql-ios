@@ -17,7 +17,7 @@
 	return self;
 }
 
--(NSDictionary *) transform:(NSDictionary *) input {
+-(NSMutableDictionary *) transform:(NSMutableDictionary *) input {
 	NSMutableDictionary * output = [input mutableCopy];
 	NSArray *listOfKeys = [input objectForKey:self.property];
 	if (!listOfKeys)

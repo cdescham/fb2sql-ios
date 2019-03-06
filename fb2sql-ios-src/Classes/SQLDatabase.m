@@ -15,12 +15,14 @@
 + (SQLDatabase *) database{
 	static dispatch_once_t pred;
 	static SQLDatabase *shared = nil;
-	dispatch_once(&pred, ^{
-		shared = [[SQLDatabase alloc] init];
-		shared.endPoint = [[SQLDatabaseEndPoint alloc] init];
-		shared.logVerbosity = Warn;
-	});
-	return shared;
+    @synchronized (shared) {
+        dispatch_once(&pred, ^{
+            shared = [[SQLDatabase alloc] init];
+            shared.endPoint = [[SQLDatabaseEndPoint alloc] init];
+            shared.logVerbosity = Warn;
+        });
+        return shared;
+    }
 }
 
 - (SQLDatabaseReference *) reference {
@@ -47,8 +49,10 @@
 	return [SQLDatabase database];
 }
 
-- (SQLDatabase *) enableLocalCache:(BOOL)value{
-	endPoint.localCacheEnabled = value;
+
+-(SQLDatabase *) enableLocalCacheWithTTL:(int)ttl {
+	endPoint.localCacheEnabled = YES;
+    endPoint.localcacheTTL = ttl;
 	return [SQLDatabase database];
 }
 
@@ -57,8 +61,8 @@
 	return [SQLDatabase database];
 }
 
-- (SQLDatabase *) seVerbosityForLog:(int)verbosity{
-	self.logVerbosity = verbosity;
+- (SQLDatabase *) setLogVerbosity:(int)verbosity{
+	self.lVerbosity = verbosity;
 	return [SQLDatabase database];
 }
 
@@ -68,7 +72,7 @@
 
 
 + (void)log:(int)severity format:(NSString *)format, ... {
-	if (severity < SQLDatabase.database.logVerbosity)
+	if (severity < SQLDatabase.database.lVerbosity)
 		return;
 	va_list args;
 	va_start(args, format);

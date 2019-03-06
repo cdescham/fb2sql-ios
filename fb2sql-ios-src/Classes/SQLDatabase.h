@@ -32,14 +32,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SQLDatabase : NSObject
 @property SQLDatabaseEndPoint *endPoint;
-@property int logVerbosity;
+@property int lVerbosity;
 
 +(void)log:(int)severity format:(NSString *)format, ...;
 +(SQLDatabase *) database;
 -(void) clearCache;
--(SQLDatabase *) seVerbosityForLog:(int)verbosity;
+- (SQLDatabase *) setLogVerbosity:(int)verbosity;
 -(SQLDatabase *) setRetryTimeout:(int)retryto;
--(SQLDatabase *) enableLocalCache:(BOOL)value;
+-(SQLDatabase *) enableLocalCacheWithTTL:(int)ttl;
 -(SQLDatabase *) setAuthPass:(NSString *)value;
 -(SQLDatabase *) setAuthUsername:(NSString *)value;
 -(SQLDatabase *) setAuthToken:(NSString *)token;

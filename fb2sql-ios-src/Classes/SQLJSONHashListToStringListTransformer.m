@@ -19,7 +19,7 @@
 }
 
 
--(NSDictionary *) transform:(NSDictionary *) input {
+-(NSMutableDictionary *) transform:(NSMutableDictionary *) input {
 	NSMutableDictionary * output = [input mutableCopy];
 	NSArray *list = [output objectForKey:self.property];
 	if (!list) return output;

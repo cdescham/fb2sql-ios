@@ -18,7 +18,7 @@
 	return self;
 }
 
--(NSDictionary *) transform:(NSDictionary *) input {
+-(NSMutableDictionary *) transform:(NSMutableDictionary *) input {
 	NSMutableDictionary * output = [input mutableCopy];
 	[output setObject:[NSString stringWithFormat:@"/api/%@s/%@",self.property,self.key] forKey:self.property];
 	return output;

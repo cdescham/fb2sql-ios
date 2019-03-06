@@ -1,0 +1,6 @@
+framework module SQLDatabase {
+  umbrella header "SQLDatabase-umbrella.h"
+
+  export *
+  module * { export * }
+}

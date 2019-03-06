@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1D2797A9E675F89A21A9042A46FC300E"
+               BlueprintIdentifier = "2AFD390067F9A39BB5C0CD07CC39B3B7"
                BuildableName = "Pods_fb2sql_ios_Example.framework"
                BlueprintName = "Pods-fb2sql-ios_Example"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D2797A9E675F89A21A9042A46FC300E"
+            BlueprintIdentifier = "2AFD390067F9A39BB5C0CD07CC39B3B7"
             BuildableName = "Pods_fb2sql_ios_Example.framework"
             BlueprintName = "Pods-fb2sql-ios_Example"
             ReferencedContainer = "container:Pods.xcodeproj">

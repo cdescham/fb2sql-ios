@@ -10,7 +10,7 @@
 
 @implementation SQLJSONCommonNormalizer
 
--(NSDictionary *) transform:(NSDictionary *) input {
+-(NSMutableDictionary *) transform:(NSMutableDictionary *) input {
 	NSMutableDictionary * output = [input mutableCopy];
 	if ([output objectForKey:@"@id"]) {
 		[output setObject:[output objectForKey:@"@id"] forKey:@"id"];

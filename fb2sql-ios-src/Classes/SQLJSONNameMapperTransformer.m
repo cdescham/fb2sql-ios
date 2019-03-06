@@ -17,7 +17,7 @@
 	return self;
 }
 
--(NSDictionary *) transform:(NSDictionary *) input {
+-(NSMutableDictionary *) transform:(NSMutableDictionary *) input {
 	NSMutableDictionary * output = [input mutableCopy];
 	[output setObject:[input objectForKey:self.property] forKey:self.key];
 	return output;

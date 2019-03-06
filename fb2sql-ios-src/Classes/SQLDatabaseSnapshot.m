@@ -7,10 +7,12 @@
 //
 
 #import "SQLDatabaseSnapshot.h"
+#import "SQLDatabaseEntity.h"
+#import "SQLJSONTransformer.h"
 
 @implementation SQLDatabaseSnapshot
 
-- (id)initWithDictionary:(NSDictionary *)dict {
+- (id)initWithDictionary:(NSMutableDictionary *)dict {
 	self = [super init];
 	self.dict = dict;
 	return self;
@@ -30,7 +32,16 @@
  * @return The data as a native object.
  */
 
--(id) value {
+-(id) value:(NSString *)className {
+    if (className) {
+        Class c =NSClassFromString(className);
+        if (![c isKindOfClass:SQLDatabaseEntity.class])
+        	return self.dict;
+        NSArray *normalizers = [c getNormalizers];
+        for (SQLJSONTransformer *t in normalizers) {
+            self.dict = [t transform:self.dict];
+        }
+    }
 	return self.dict;
 }
 

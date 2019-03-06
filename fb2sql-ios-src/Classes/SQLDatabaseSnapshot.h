@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SQLDatabaseSnapshot : NSObject
 
-@property NSDictionary *dict;
+@property NSMutableDictionary *dict;
 
-- (id)initWithDictionary:(NSDictionary *)dict;
+- (id)initWithDictionary:(NSMutableDictionary *)dict;
 
 
 @end

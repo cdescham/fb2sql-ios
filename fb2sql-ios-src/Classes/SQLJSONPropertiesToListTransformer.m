@@ -18,7 +18,7 @@
 	return self;
 }
 
--(NSDictionary *) transform:(NSDictionary *) input {
+-(NSMutableDictionary *) transform:(NSMutableDictionary *) input {
 	NSMutableDictionary * output = [input mutableCopy];
 	NSMutableArray * grouped = [[NSMutableArray alloc] init];
 	for (NSString *property in self.propertyNames) {

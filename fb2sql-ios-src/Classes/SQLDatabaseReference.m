@@ -10,6 +10,12 @@
 
 @implementation SQLDatabaseReference
 
+
+-(SQLDatabaseReference *) reference:(NSString *)table {
+    self.table = table;
+    return self;
+}
+
 -(SQLDatabaseReference *) child:(NSString *)label {
 	if (!self.table)
 		self.table = label;

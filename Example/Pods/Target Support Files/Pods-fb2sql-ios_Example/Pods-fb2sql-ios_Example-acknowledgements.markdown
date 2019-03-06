@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-## fb2sql-ios
+## SQLDatabase
 
 Copyright (c) 2019 cdescham <christophe.deschamps.work@gmail.com>
 

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(NSString *)idFromIRI:(NSString *)iri;
 
--(NSDictionary *) transform:(NSDictionary *) input;
+-(NSMutableDictionary *) transform:(NSMutableDictionary *) input;
 
 
 

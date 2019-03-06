@@ -23,6 +23,7 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		A28351BE8DE1226D1821609E /* Pods_fb2sql_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D61A9A486E7F44E2681FA74 /* Pods_fb2sql_ios_Tests.framework */; };
+		C697A889222FB3EA00BEA562 /* SQLDatabase.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C697A888222FB3EA00BEA562 /* SQLDatabase.podspec */; };
 		EC3EADC83C95ABF78ACA6D15 /* Pods_fb2sql_ios_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E32601468DB6C63F6133175 /* Pods_fb2sql_ios_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +39,6 @@
 
 /* Begin PBXFileReference section */
 		091262364AA0FE4EA286E11E /* Pods-fb2sql-ios_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fb2sql-ios_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-fb2sql-ios_Example/Pods-fb2sql-ios_Example.release.xcconfig"; sourceTree = "<group>"; };
-		0965E9D97C06421C07488F6F /* fb2sql-ios.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "fb2sql-ios.podspec"; path = "../fb2sql-ios.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0E32601468DB6C63F6133175 /* Pods_fb2sql_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fb2sql_ios_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4634AE71538B36E1ED5BA585 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		5C3C792E1EC4BF571A4C20BD /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -66,6 +66,7 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B391E95E3BAA446A89A851D /* Pods-fb2sql-ios_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fb2sql-ios_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fb2sql-ios_Example/Pods-fb2sql-ios_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8D61A9A486E7F44E2681FA74 /* Pods_fb2sql_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fb2sql_ios_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C697A888222FB3EA00BEA562 /* SQLDatabase.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SQLDatabase.podspec; path = ../SQLDatabase.podspec; sourceTree = "<group>"; };
 		E17F28213090CB46E9757752 /* Pods-fb2sql-ios_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fb2sql-ios_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-fb2sql-ios_Tests/Pods-fb2sql-ios_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,7 +190,7 @@
 		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				0965E9D97C06421C07488F6F /* fb2sql-ios.podspec */,
+				C697A888222FB3EA00BEA562 /* SQLDatabase.podspec */,
 				5C3C792E1EC4BF571A4C20BD /* README.md */,
 				4634AE71538B36E1ED5BA585 /* LICENSE */,
 			);
@@ -247,6 +248,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = cdescham;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = DY7GE5XGWL;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -277,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				C697A889222FB3EA00BEA562 /* SQLDatabase.podspec in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
@@ -302,20 +307,20 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-fb2sql-ios_Example/Pods-fb2sql-ios_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-fb2sql-ios_Example/Pods-fb2sql-ios_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/fb2sql-ios/fb2sql_ios.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLDatabase/SQLDatabase.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fb2sql_ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLDatabase.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fb2sql-ios_Example/Pods-fb2sql-ios_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-fb2sql-ios_Example/Pods-fb2sql-ios_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F13E197D26F50C4729CBC51F /* [CP] Check Pods Manifest.lock */ = {
@@ -499,6 +504,7 @@
 			baseConfigurationReference = 8B391E95E3BAA446A89A851D /* Pods-fb2sql-ios_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = DY7GE5XGWL;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fb2sql-ios/fb2sql-ios-Prefix.pch";
 				INFOPLIST_FILE = "fb2sql-ios/fb2sql-ios-Info.plist";
@@ -514,6 +520,7 @@
 			baseConfigurationReference = 091262364AA0FE4EA286E11E /* Pods-fb2sql-ios_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = DY7GE5XGWL;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fb2sql-ios/fb2sql-ios-Prefix.pch";
 				INFOPLIST_FILE = "fb2sql-ios/fb2sql-ios-Info.plist";

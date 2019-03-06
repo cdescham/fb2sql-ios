@@ -7,12 +7,23 @@
 //
 
 #import "SQLDatabaseAppDelegate.h"
+#import <SQLDatabase/SQLDatabase.h>
 
 @implementation SQLDatabaseAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    
+    NSString *sqlApiUrl = @"https://api-php-dev.yoomum.com/api";
+    NSString *sqlApiAuthToken = @"4UFsaVeqleSIMbvRqBfnlZ0mnE";
+    int sqlApiLogVerbosity = 0;
+    
+    // SQL Database (migration from Firebase)
+    [[[[[SQLDatabase.database setUri:sqlApiUrl] setAuthToken:sqlApiAuthToken] setLogVerbosity:sqlApiLogVerbosity] enableLocalCacheWithTTL:120] setRetryTimeout:20];
+ 
+
+    
+    
     return YES;
 }
 

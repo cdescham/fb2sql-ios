@@ -10,7 +10,7 @@
 
 @implementation SQLJSONTransformer
 
--(NSDictionary *) transform:(NSDictionary *) input {
+-(NSMutableDictionary *) transform:(NSMutableDictionary *) input {
 	// stub
 	return nil;
 }

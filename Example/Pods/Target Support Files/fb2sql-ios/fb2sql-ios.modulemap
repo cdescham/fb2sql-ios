@@ -1,6 +1,0 @@
-framework module fb2sql_ios {
-  umbrella header "fb2sql-ios-umbrella.h"
-
-  export *
-  module * { export * }
-}
