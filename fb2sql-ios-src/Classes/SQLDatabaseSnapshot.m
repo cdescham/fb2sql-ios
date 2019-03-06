@@ -9,14 +9,15 @@
 #import "SQLDatabaseSnapshot.h"
 #import "SQLDatabaseEntity.h"
 #import "SQLJSONTransformer.h"
+#import "SQLDatabase.h"
 
 @implementation SQLDatabaseSnapshot
 
 - (id)initWithDictionary:(NSMutableDictionary *)dict andTable:(NSString *)table {
-	self = [super init];
-	self.dict = dict;
+    self = [super init];
+    self.dict = dict;
     self.table = table;
-	return self;
+    return self;
 }
 
 
@@ -45,18 +46,18 @@
  * @return The data as a native object.
  */
 
--(id) value:(NSString *)className {
-    if (className) {
-        Class c =NSClassFromString(className);
-        if (![c isKindOfClass:SQLDatabaseEntity.class])
-        	return self.dict;
-        NSArray *normalizers = [c getNormalizers];
+-(id) value:(NSArray<SQLJSONTransformer *> *)normalizers {
+    self.key = [self.dict objectForKey:[[self.table substringToIndex:self.table.length-1] stringByAppendingString:@"Id"]];
+    LOGD(@"Processing %d normalizer(s) initial dict= %@",normalizers.count,self.dict );
+    if (normalizers) {
         for (SQLJSONTransformer *t in normalizers) {
             self.dict = [t transform:self.dict];
+            LOGD(@"Processing normalizer %@ dict = %@",t.class,self.dict);
         }
     }
-    self.key = [self.dict objectForKey:[[self.table substringToIndex:self.table.length-1] stringByAppendingString:@"Id"]];
-	return self.dict;
+    LOGD(@"Processed %d normalizer(s) result is %@",normalizers.count,self.dict);
+
+    return self.dict;
 }
 
 @end

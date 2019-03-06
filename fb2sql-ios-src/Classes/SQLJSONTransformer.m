@@ -16,10 +16,10 @@
 }
 
 -(NSString *)idFromIRI:(NSString *)iri {
-	if (iri || ![iri hasPrefix:@"/api"])
+	if (!iri || ![iri hasPrefix:@"/api"])
 		return nil;
 	else
-		return [[iri componentsSeparatedByString:@"/"] objectAtIndex:2];
+		return [[iri componentsSeparatedByString:@"/"] objectAtIndex:3];
 	
 }
 

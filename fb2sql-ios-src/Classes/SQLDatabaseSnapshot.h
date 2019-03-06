@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SQLJSONTransformer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *key;
 
 - (id)initWithDictionary:(NSMutableDictionary *)dict andTable:(NSString *)table;
--(id) value:(NSString *)className;
+-(id) value:(NSArray<SQLJSONTransformer *> *)normalizers;
 -(NSEnumerator<SQLDatabaseSnapshot *>*) children;
 -(BOOL) exists;
 

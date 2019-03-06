@@ -7,6 +7,7 @@
 //
 
 #import "SQLJSONHashListToStringListTransformer.h"
+#import "SQLDatabase.h"
 
 @implementation SQLJSONHashListToStringListTransformer
 
@@ -26,6 +27,7 @@
 	
 	NSMutableArray *listOfKeys = [[NSMutableArray alloc] init];
 	for (NSDictionary *sublist in list) {
+        LOGI(@"cdes %@ %@ ",[sublist objectForKey:self.key], [super idFromIRI:[sublist objectForKey:self.key]]);
 		[listOfKeys addObject:[super idFromIRI:[sublist objectForKey:self.key]]];
 	}
 	[output setObject:listOfKeys forKey:self.property];
