@@ -25,7 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSMutableDictionary *blocksQueueForOngoingRequests;
 
 +(SQLDatabaseApiPlatformStore *)sharedManager;
--(void) get:(NSString *)table pk:(NSString *)pk geoSearch:(NSString *)geoSearch parameters:(NSString *)parameters okBlock:(void (^)(SQLDatabaseSnapshot *))okBlock koBlock:(nullable void (^)(NSError *))koBlock;
+-(void) get:(NSString *)table pk:(NSString *)pk geoSearch:(NSString *)geoSearch parameters:(NSString *)parameters block:(void (^)(SQLDatabaseSnapshot *))block;
+-(void) remove:(NSString *)table pk:(NSString *)pk block:(void (^)(NSError *))block;
+-(void) insert:(NSString *)table json:(NSDictionary *)jsonDict block:(void (^)(NSError *))block;
+-(void) update:(NSString *)table pk:(NSString *)pk json:(NSDictionary *)jsonDict block:(void (^)(NSError *))block insertOn404:(BOOL)insertOn404;
 
 @end
 

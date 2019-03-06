@@ -34,8 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property SQLDatabaseEndPoint *endPoint;
 @property int lVerbosity;
 
+@property(nonatomic, class, strong, readonly) SQLDatabase *_Nonnull database;
+
 +(void)log:(int)severity format:(NSString *)format, ...;
-+(SQLDatabase *) database;
 -(void) clearCache;
 - (SQLDatabase *) setLogVerbosity:(int)verbosity;
 -(SQLDatabase *) setRetryTimeout:(int)retryto;

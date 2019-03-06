@@ -20,7 +20,7 @@
 	}
 }
 
--(void) get:(NSString *)table pk:(NSString *)pk geoSearch:(NSString *)geoSearch parameters:(NSString *)parameters okBlock:(void (^)(SQLDatabaseSnapshot *))okBlock koBlock:(nullable void (^)(NSError *))koBlock {
+-(void) get:(NSString *)table pk:(NSString *)pk geoSearch:(NSString *)geoSearch parameters:(NSString *)parameters block:(void (^)(SQLDatabaseSnapshot *))block {
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSNumber *seq = self.getSeqNum;
 	NSString *point = nil;
@@ -34,14 +34,13 @@
 	if (endPoint.localCacheEnabled) {
 		NSDictionary *json = [SQLDatabaseLocalCache.instance get:point ttl:endPoint.localcacheTTL];
 		if (json) {
-			okBlock([[SQLDatabaseSnapshot alloc] initWithDictionary:json]);
+			block([[SQLDatabaseSnapshot alloc] initWithDictionary:json andTable:table]);
 			return;
 		}
 	}
 	@synchronized (blocksQueueForOngoingRequests) {
 		BlockVector *bv = [[BlockVector alloc] init];
-		bv.okBlock = okBlock;
-		bv.koBlock = koBlock;
+		bv.okBlock = block;
 		NSMutableArray *waitingVectorsForRequest = [blocksQueueForOngoingRequests objectForKey:point];
 		if (waitingVectorsForRequest) {
 			[waitingVectorsForRequest addObject:bv];
@@ -56,14 +55,14 @@
 	[self enqueueReadRequestForEndpointAndExpectedReturnCode:point expectedRC:200 pk:pk table:table seq:seq];
 }
 
--(void) dispatchResults:(BOOL)success point:(NSString *)point andResult:(NSDictionary *)result  error:(NSError *)error{
+-(void) dispatchResults:(BOOL)success point:(NSString *)point andResult:(NSDictionary *)result  error:(NSError *)error table:(NSString *)table{
 	@synchronized (blocksQueueForOngoingRequests) {
 		for (BlockVector *bv in [blocksQueueForOngoingRequests objectForKey:point]) {
 			dispatch_async(dispatch_get_main_queue(), ^{
 				if (success)
-					bv.okBlock([[SQLDatabaseSnapshot alloc] initWithDictionary:result]);
-				else if (bv.koBlock)
-					bv.koBlock(error);
+					bv.okBlock([[SQLDatabaseSnapshot alloc] initWithDictionary:result andTable:table]);
+                else
+                	bv.okBlock([[SQLDatabaseSnapshot alloc] initWithDictionary:nil andTable:table]);
 			});
 		}
 		[blocksQueueForOngoingRequests removeObjectForKey:point];
@@ -103,37 +102,37 @@
 					if (SQLDatabase.database.endPoint.localCacheEnabled) {
 						[SQLDatabaseLocalCache.instance put:point value:result];
 					}
-					LOGD(@"[%@][read response] %@",seq,point,result);
-					[self dispatchResults:true point:point andResult:result error:nil];
+					LOGD(@"[%@][read response] %@ %@",seq,point,result);
+                    [self dispatchResults:true point:point andResult:result error:nil table:table];
 				} else {
-					LOGD(@"[%@][read error - json] %@",seq,point,jsonerror);
-					[self dispatchResults:false point:point andResult:nil error:jsonerror];
+					LOGD(@"[%@][read error - json] %@ %@",seq,point,jsonerror);
+					[self dispatchResults:false point:point andResult:nil error:jsonerror table:table];
 				}
 			} else {
 				NSError *e = [self errorForReason:@"wrong return code." code:[httpResponse statusCode]];
-				LOGD(@"[%@][read error - wrong status code] %@",seq,point,e);
-				[self dispatchResults:false point:point andResult:nil error:e];
+				LOGD(@"[%@][read error - wrong status code] %@ %@",seq,point,e);
+				[self dispatchResults:false point:point andResult:nil error:e table:table];
 			}
 		}
 	}] resume];
 }
 
 
--(void) insert:(NSString *)table json:(NSDictionary *)jsonDict okBlock:(void (^)(void))okBlock koBlock:(void (^)(NSError *))koBlock {
+-(void) insert:(NSString *)table json:(NSDictionary *)jsonDict okBlock:(void (^)(NSError *))okBlock  {
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSString *point = [NSString stringWithFormat:@"%@/%@",endPoint.uriString,table];
-	[self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:jsonDict method:@"POST" expectedRC:201 table:table okBlock:okBlock koBlock:koBlock];
+	[self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:jsonDict method:@"POST" expectedRC:201 table:table okBlock:okBlock];
 }
 
--(void) delete:(NSString *)table pk:(NSString *)pk okBlock:(void (^)(void))okBlock koBlock:(void (^)(NSError *))koBlock {
+-(void) remove:(NSString *)table pk:(NSString *)pk okBlock:(void (^)(NSError *))okBlock {
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSString *point = [NSString stringWithFormat:@"%@/%@/%@",endPoint.uriString,table,pk];
-	[self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:nil method:@"DELETE" expectedRC:304 table:table okBlock:okBlock koBlock:koBlock];
+	[self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:nil method:@"DELETE" expectedRC:304 table:table okBlock:okBlock];
 }
 
 
 
--(void) update:(NSString *)table pk:(NSString *)pk json:(NSDictionary *)jsonDict okBlock:(void (^)(void))okBlock koBlock:(void (^)(NSError *))koBlock insertOn404:(BOOL)insertOn404{
+-(void) update:(NSString *)table pk:(NSString *)pk json:(NSDictionary *)jsonDict okBlock:(void (^)(NSError *))okBlock insertOn404:(BOOL)insertOn404{
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSString *point = [NSString stringWithFormat:@"%@/%@/%@",endPoint.uriString,table,pk];
 	NSURL *url =[NSURL URLWithString:point];
@@ -149,22 +148,22 @@
 	[[SQLDatabaseApiPlatformStore.sharedManager.manager dataTaskWithRequest:urlRequest completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
 		if (!error && [httpResponse statusCode] == 404 && insertOn404) {
-			[self insert:table json:jsonDict okBlock:okBlock koBlock:koBlock];
+			[self insert:table json:jsonDict okBlock:okBlock];
 		} else if (!error && [httpResponse statusCode] == 200) {
 			dispatch_async(dispatch_get_main_queue(), ^{
 				if (okBlock)
-					okBlock();
+					okBlock(nil);
 			});
 		} else {
 			dispatch_async(dispatch_get_main_queue(), ^{
-				if (koBlock)
-					koBlock(error);
+				if (okBlock)
+					okBlock(error);
 			});
 		}
 	}] resume];
 }
 
--(void) enqueueWriteRequestForEndpointAndExpectedReturnCode :(NSString *)point jsonDict:(NSDictionary *)jsonDict method:(NSString *)method expectedRC:(int)expectedRC  table:(NSString *)table okBlock:(void (^)(void))okBlock koBlock:(void (^)(NSError *))koBlock{
+-(void) enqueueWriteRequestForEndpointAndExpectedReturnCode :(NSString *)point jsonDict:(NSDictionary *)jsonDict method:(NSString *)method expectedRC:(int)expectedRC  table:(NSString *)table okBlock:(void (^)(NSError *))okBlock{
 	NSURL *url =[NSURL URLWithString:point];
 	NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
 	NSData *requestData = jsonDict ? [NSJSONSerialization dataWithJSONObject:jsonDict options:0 error:nil] : nil;
@@ -180,12 +179,12 @@
 		if (!error && [httpResponse statusCode] == expectedRC) {
 			dispatch_async(dispatch_get_main_queue(), ^{
 				if (okBlock)
-					okBlock();
+					okBlock(nil);
 			});
 		} else {
 			dispatch_async(dispatch_get_main_queue(), ^{
-				if (koBlock)
-					koBlock(error);
+				if (okBlock)
+					okBlock(error);
 			});
 		}
 	}] resume];

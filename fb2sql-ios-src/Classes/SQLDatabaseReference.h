@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SQLDatabaseApiPlatformStore.h"
 #import "SQLDatabaseSnapshot.h"
+#import "SQLDatabaseEventType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,9 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property  NSString * parameters;
 @property  NSString *pivotfield;
 
-- (void)observeSingleEvenWithBlock:(void (^)(SQLDatabaseSnapshot *snapshot))block;
+- (void)observeSingleEvent:(SQLDatabaseEventType)type withBlock:(void (^)(SQLDatabaseSnapshot *snapshot))block;
+- (void) updateChildValues:(NSDictionary *)values withCompletionBlock:(void (^)(NSError *__nullable error, SQLDatabaseReference * ref))block;
+- (void) setValue:(nullable id)value withCompletionBlock:(void (^)(NSError *__nullable error, SQLDatabaseReference * ref))block;
 -(SQLDatabaseReference *) child:(NSString *)label;
 -(SQLDatabaseReference *) reference:(NSString *)table;
+-(SQLDatabaseReference *) orderByChildAsc:(NSString *)field;
+-(SQLDatabaseReference *) limitToFirst:(int)limit;
+-(SQLDatabaseReference *) equalTo:(NSString *)value;
 
 @end
 

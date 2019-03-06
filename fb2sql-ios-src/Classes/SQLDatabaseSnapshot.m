@@ -12,13 +12,26 @@
 
 @implementation SQLDatabaseSnapshot
 
-- (id)initWithDictionary:(NSMutableDictionary *)dict {
+- (id)initWithDictionary:(NSMutableDictionary *)dict andTable:(NSString *)table {
 	self = [super init];
 	self.dict = dict;
+    self.table = table;
 	return self;
 }
 
 
+-(NSEnumerator<SQLDatabaseSnapshot *>*) children {
+    NSMutableArray *children = [[NSMutableArray alloc] init];
+    for (NSDictionary *child in [self.dict objectForKey:@"hydra:member"]) {
+        [children addObject:[[SQLDatabaseSnapshot alloc] initWithDictionary:child andTable:self.table]];
+    }
+    return [children objectEnumerator];
+}
+
+
+-(BOOL) exists {
+    return self.dict != nil;
+}
 
 /**
  * Returns the contents of this data snapshot as native types.
@@ -42,6 +55,7 @@
             self.dict = [t transform:self.dict];
         }
     }
+    self.key = [self.dict objectForKey:[[self.table substringToIndex:self.table.length-1] stringByAppendingString:@"Id"]];
 	return self.dict;
 }
 

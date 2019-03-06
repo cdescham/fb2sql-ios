@@ -13,9 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SQLDatabaseSnapshot : NSObject
 
 @property NSMutableDictionary *dict;
+@property NSString *table;
+@property NSString *key;
 
-- (id)initWithDictionary:(NSMutableDictionary *)dict;
-
+- (id)initWithDictionary:(NSMutableDictionary *)dict andTable:(NSString *)table;
+-(id) value:(NSString *)className;
+-(NSEnumerator<SQLDatabaseSnapshot *>*) children;
+-(BOOL) exists;
 
 @end
 

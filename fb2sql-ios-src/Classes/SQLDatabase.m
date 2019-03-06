@@ -12,17 +12,23 @@
 @implementation SQLDatabase
 @synthesize endPoint;
 
-+ (SQLDatabase *) database{
-	static dispatch_once_t pred;
-	static SQLDatabase *shared = nil;
-    @synchronized (shared) {
-        dispatch_once(&pred, ^{
-            shared = [[SQLDatabase alloc] init];
-            shared.endPoint = [[SQLDatabaseEndPoint alloc] init];
-            shared.logVerbosity = Warn;
-        });
-        return shared;
+
+- (id)init {
+    if (self = [super init]) {
+        self.endPoint = [[SQLDatabaseEndPoint alloc] init];
+        self.lVerbosity = Warn;
     }
+    return self;
+}
+
++ (SQLDatabase *) database{
+    static dispatch_once_t pred;
+    static SQLDatabase *shared = nil;
+    dispatch_once(&pred, ^{
+        shared = [[SQLDatabase alloc] init];
+    });
+    return shared;
+    
 }
 
 - (SQLDatabaseReference *) reference {

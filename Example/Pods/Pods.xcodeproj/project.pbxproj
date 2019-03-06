@@ -83,8 +83,9 @@
 		BDC8F7EDE318AB18647577EAA9EEF811 /* SQLDatabaseNormaliser.h in Headers */ = {isa = PBXBuildFile; fileRef = 840C3DEA94B8FA35129871834FDA6B66 /* SQLDatabaseNormaliser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0D7C4C0E2F81F33763764BEA3730622 /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F14B34AD02B33F27AF68A545FBF71E /* UIRefreshControl+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C2E492A5762B1EB6042CD124CA4B2018 /* UIActivityIndicatorView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 57FBEBCB4BE909C6D2C55CF5EEDA2EF0 /* UIActivityIndicatorView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C697A88E222FD1C200BEA562 /* SQLDatabaseEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = C697A88C222FD1C200BEA562 /* SQLDatabaseEntity.h */; };
-		C697A88F222FD1C200BEA562 /* SQLDatabaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C697A88D222FD1C200BEA562 /* SQLDatabaseEntity.m */; };
+		C697A892222FD76200BEA562 /* SQLDatabaseEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = C697A890222FD76200BEA562 /* SQLDatabaseEntity.h */; };
+		C697A893222FD76200BEA562 /* SQLDatabaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C697A891222FD76200BEA562 /* SQLDatabaseEntity.m */; };
+		C697A89822302E2F00BEA562 /* SQLDatabaseEventType.h in Headers */ = {isa = PBXBuildFile; fileRef = C697A89722302E2F00BEA562 /* SQLDatabaseEventType.h */; };
 		C91D28C5AF7135F827B681736F933021 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA98173D51A44A0B7665172C1F5E8EDF /* CoreGraphics.framework */; };
 		CC797A1F1CA3E97DAF459F3B09A6BBEE /* SQLJSONIRIBuilderTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = F0D333525EA8F1224AAC893BCE2624DB /* SQLJSONIRIBuilderTransformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D098A96E416DDC689EC7E4CF7A987522 /* SQLDatabaseApiPlatformStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 67F40EB1DC648E58E13F12F1D7E2302B /* SQLDatabaseApiPlatformStore.m */; };
@@ -236,8 +237,9 @@
 		C355ED7EB8A07FE3E44620C9F4991D69 /* SQLDatabaseReference.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SQLDatabaseReference.h; path = "fb2sql-ios-src/Classes/SQLDatabaseReference.h"; sourceTree = "<group>"; };
 		C5CC0F09AB8BB13761DFF49A25F1B865 /* AFNetworking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = AFNetworking.modulemap; sourceTree = "<group>"; };
 		C614D7A41096A9970D57FB3B14DA50B9 /* SQLDatabase.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SQLDatabase.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		C697A88C222FD1C200BEA562 /* SQLDatabaseEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLDatabaseEntity.h; sourceTree = "<group>"; };
-		C697A88D222FD1C200BEA562 /* SQLDatabaseEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLDatabaseEntity.m; sourceTree = "<group>"; };
+		C697A890222FD76200BEA562 /* SQLDatabaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLDatabaseEntity.h; path = "fb2sql-ios-src/Classes/SQLDatabaseEntity.h"; sourceTree = "<group>"; };
+		C697A891222FD76200BEA562 /* SQLDatabaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SQLDatabaseEntity.m; path = "fb2sql-ios-src/Classes/SQLDatabaseEntity.m"; sourceTree = "<group>"; };
+		C697A89722302E2F00BEA562 /* SQLDatabaseEventType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLDatabaseEventType.h; path = "fb2sql-ios-src/Classes/SQLDatabaseEventType.h"; sourceTree = "<group>"; };
 		C93E43ACAB4656380E763869EA6F095F /* SQLJSONStringListToHashListTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SQLJSONStringListToHashListTransformer.m; path = "fb2sql-ios-src/Classes/SQLJSONStringListToHashListTransformer.m"; sourceTree = "<group>"; };
 		C9E82ADA683C4660E85373B4D78F60F2 /* AFNetworking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AFNetworking.xcconfig; sourceTree = "<group>"; };
 		CD8E5249A4D1A914BB56165C85728761 /* Pods_fb2sql_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fb2sql_ios_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -373,6 +375,9 @@
 		69528E136F7F680093F528740B66087D /* SQLDatabase */ = {
 			isa = PBXGroup;
 			children = (
+				C697A89722302E2F00BEA562 /* SQLDatabaseEventType.h */,
+				C697A890222FD76200BEA562 /* SQLDatabaseEntity.h */,
+				C697A891222FD76200BEA562 /* SQLDatabaseEntity.m */,
 				A7E587AFB7C5BC6A8BFCF3AB6F08EF44 /* BlockVector.h */,
 				7942133B1320DBC9841DBB6BD9139FDC /* BlockVector.m */,
 				853F5DD455DA148196A3F18CBD471F24 /* fb2sql.h */,
@@ -414,8 +419,6 @@
 				C93E43ACAB4656380E763869EA6F095F /* SQLJSONStringListToHashListTransformer.m */,
 				8DEBF078A514AD03A120BAD83E9CE429 /* SQLJSONTransformer.h */,
 				A1336952E16164F2F4008BA95C082440 /* SQLJSONTransformer.m */,
-				C697A88C222FD1C200BEA562 /* SQLDatabaseEntity.h */,
-				C697A88D222FD1C200BEA562 /* SQLDatabaseEntity.m */,
 				E6CD5F4C4348FDAE10B5439099595EE8 /* Pod */,
 				3F004FCCC65A029FECF27C5FDDBCB628 /* Support Files */,
 			);
@@ -634,7 +637,6 @@
 				9371F6F10B0802F57C5C8B8963284278 /* SQLDatabaseLocalCache.h in Headers */,
 				BDC8F7EDE318AB18647577EAA9EEF811 /* SQLDatabaseNormaliser.h in Headers */,
 				5B2ECD19177C698372ED8F8FD3D9CF13 /* SQLDatabaseReference.h in Headers */,
-				C697A88E222FD1C200BEA562 /* SQLDatabaseEntity.h in Headers */,
 				7C2487AAE5FAC2DFCCCDD5FC98B54B53 /* SQLDatabaseSnapshot.h in Headers */,
 				A4C3B6C2411CCD06C2203D297D7B8F7B /* SQLJSONCommonNormalizer.h in Headers */,
 				265FA818F4D001F36D4022407B02162E /* SQLJSONHashListToStringListTransformer.h in Headers */,
@@ -644,8 +646,10 @@
 				39DEB75A45B6C2E1E1C51955F08E3AB5 /* SQLJSONListToHashTransformer.h in Headers */,
 				67B9E547A0CC411AEE9F783C319BBEA1 /* SQLJSONListToPropertiesTransformer.h in Headers */,
 				326C348959CBB9E04A4C76FBBCACCB5B /* SQLJSONNameMapperTransformer.h in Headers */,
+				C697A892222FD76200BEA562 /* SQLDatabaseEntity.h in Headers */,
 				9F15FFE6BBB8EAEFA1D80362FF1DD2AA /* SQLJSONPropertiesToListTransformer.h in Headers */,
 				2152D0F6F20F31E3E4A990D7524973BE /* SQLJSONRemovePropertyTransformer.h in Headers */,
+				C697A89822302E2F00BEA562 /* SQLDatabaseEventType.h in Headers */,
 				DDC927E03C748C4E0365EB19CFD5B076 /* SQLJSONStringListToHashListTransformer.h in Headers */,
 				F0FF838DB12C1AAF96DF8D42869A2A3B /* SQLJSONTransformer.h in Headers */,
 			);
@@ -858,12 +862,12 @@
 				AD89D73C779BFB0C66A2D20C02C708E0 /* SQLJSONHashToListTransformer.m in Sources */,
 				8F956B573E7B880008D21D6895290DC7 /* SQLJSONIRIBuilderTransformer.m in Sources */,
 				0E83C3562DE3711110F6D1959A2E047C /* SQLJSONListExpanderTransformer.m in Sources */,
+				C697A893222FD76200BEA562 /* SQLDatabaseEntity.m in Sources */,
 				0F55E9E812634C8C5CC841B71909BC5E /* SQLJSONListToHashTransformer.m in Sources */,
 				4FDC63E443A81F29AB9B2BCEE49DB71B /* SQLJSONListToPropertiesTransformer.m in Sources */,
 				819A9D456FDA72C5A83474D45D1B26CA /* SQLJSONNameMapperTransformer.m in Sources */,
 				9B45191F8C2C41B31C4851D69EFE8B88 /* SQLJSONPropertiesToListTransformer.m in Sources */,
 				48119945C6C8737160ED92EB2ECEEBAC /* SQLJSONRemovePropertyTransformer.m in Sources */,
-				C697A88F222FD1C200BEA562 /* SQLDatabaseEntity.m in Sources */,
 				A4009C64CBEA50896FF7375D6FF00E5D /* SQLJSONStringListToHashListTransformer.m in Sources */,
 				52A822A9E0F253687B5371638BBE3C32 /* SQLJSONTransformer.m in Sources */,
 			);
