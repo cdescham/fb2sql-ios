@@ -32,9 +32,9 @@
 		point =[NSString stringWithFormat:@"%@/%@?%@",endPoint.uriString,table,parameters];
 	LOGD(@"[%@][read request] %@",seq,point);
 	if (endPoint.localCacheEnabled) {
-		NSDictionary *json = [SQLDatabaseLocalCache.instance get:point ttl:endPoint.localcacheTTL];
-		if (json) {
-			block([[SQLDatabaseSnapshot alloc] initWithDictionary:json andTable:table]);
+		SQLDatabaseSnapshot *snap = [SQLDatabaseLocalCache.instance get:point ttl:endPoint.localcacheTTL];
+		if (snap) {
+			block(snap);
 			return;
 		}
 	}
@@ -55,17 +55,16 @@
 	[self enqueueReadRequestForEndpointAndExpectedReturnCode:point expectedRC:200 pk:pk table:table seq:seq];
 }
 
--(void) dispatchResults:(BOOL)success point:(NSString *)point andResult:(NSDictionary *)result  error:(NSError *)error table:(NSString *)table{
-	@synchronized (blocksQueueForOngoingRequests) {
+-(SQLDatabaseSnapshot *) dispatchResults:(BOOL)success point:(NSString *)point andResult:(NSDictionary *)result  error:(NSError *)error table:(NSString *)table{
+    SQLDatabaseSnapshot *snap = [[SQLDatabaseSnapshot alloc] initWithDictionary:success?result:nil andTable:table];
+    @synchronized (blocksQueueForOngoingRequests) {
 		for (BlockVector *bv in [blocksQueueForOngoingRequests objectForKey:point]) {
 			dispatch_async(dispatch_get_main_queue(), ^{
-				if (success)
-					bv.okBlock([[SQLDatabaseSnapshot alloc] initWithDictionary:result andTable:table]);
-                else
-                	bv.okBlock([[SQLDatabaseSnapshot alloc] initWithDictionary:nil andTable:table]);
+					bv.okBlock(snap);
 			});
 		}
 		[blocksQueueForOngoingRequests removeObjectForKey:point];
+        return snap;
 	}
 }
 
@@ -99,11 +98,11 @@
 			if ([httpResponse statusCode] == expectedRC) {
 				NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&jsonerror];
 				if (jsonerror == nil) {
+                    SQLDatabaseSnapshot *snap =[self dispatchResults:true point:point andResult:result error:nil table:table];
 					if (SQLDatabase.database.endPoint.localCacheEnabled) {
-						[SQLDatabaseLocalCache.instance put:point value:result];
+						[SQLDatabaseLocalCache.instance put:point value:snap];
 					}
 					LOGD(@"[%@][read response] %@ %@",seq,point,result);
-                    [self dispatchResults:true point:point andResult:result error:nil table:table];
 				} else {
 					LOGD(@"[%@][read error - json] %@ %@",seq,point,jsonerror);
 					[self dispatchResults:false point:point andResult:nil error:jsonerror table:table];

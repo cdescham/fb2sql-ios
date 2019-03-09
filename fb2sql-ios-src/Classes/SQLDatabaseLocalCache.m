@@ -11,7 +11,7 @@
 
 @interface CacheObject : NSObject
 	@property NSDate *storedDate;
-	@property NSDictionary *jsonDict;
+	@property SQLDatabaseSnapshot *snap;
 @end
 
 @implementation CacheObject : NSObject
@@ -19,19 +19,19 @@
 	
 @implementation SQLDatabaseLocalCache
 
--(NSDictionary *) get:(NSString *)key ttl:(int)ttl{
+-(SQLDatabaseSnapshot *) get:(NSString *)key ttl:(int)ttl{
 	@synchronized (self.cache) {
 		CacheObject *o = [self.cache objectForKey:key];
 		if (!o || o.storedDate.timeIntervalSinceNow > ttl) return nil;
-		else return o.jsonDict;
+		else return o.snap;
 	}
 }
 
--(void) put:(NSString *)key value:(NSDictionary *)jsonDict {
+-(void) put:(NSString *)key value:(SQLDatabaseSnapshot *)snap {
 	@synchronized (self.cache) {
 		CacheObject *o = [[CacheObject alloc] init];
 		o.storedDate = [NSDate date];
-		o.jsonDict = jsonDict;
+		o.snap = snap;
 	}
 }
 

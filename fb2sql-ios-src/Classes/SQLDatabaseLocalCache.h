@@ -7,14 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SQLDatabaseSnapshot.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SQLDatabaseLocalCache : NSObject
 @property NSMutableDictionary *cache;
 + (SQLDatabaseLocalCache *) instance;
--(NSDictionary *) get:(NSString *)key ttl:(int)ttl;
--(void) put:(NSString *)key value:(NSDictionary *)jsonDict;
+-(SQLDatabaseSnapshot *) get:(NSString *)key ttl:(int)ttl;
+-(void) put:(NSString *)key value:(SQLDatabaseSnapshot *)snap;
 -(void)clear;
 
 @end

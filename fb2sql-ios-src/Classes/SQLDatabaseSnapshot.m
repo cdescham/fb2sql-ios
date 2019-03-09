@@ -17,6 +17,7 @@
     self = [super init];
     self.dict = dict;
     self.table = table;
+    self.normalized = NO;
     return self;
 }
 
@@ -47,17 +48,23 @@
  */
 
 -(id) value:(NSArray<SQLJSONTransformer *> *)normalizers {
-    self.key = [self.dict objectForKey:[[self.table substringToIndex:self.table.length-1] stringByAppendingString:@"Id"]];
-    LOGD(@"Processing %d normalizer(s) initial dict= %@",normalizers.count,self.dict );
-    if (normalizers) {
-        for (SQLJSONTransformer *t in normalizers) {
-            self.dict = [t transform:self.dict];
-            LOGD(@"Processing normalizer %@ dict = %@",t.class,self.dict);
+    
+    @synchronized (self.dict) {
+        if (self.normalized)
+            return self.dict;
+        
+        self.key = [self.dict objectForKey:[[self.table substringToIndex:self.table.length-1] stringByAppendingString:@"Id"]];
+        LOGD(@"Processing %d normalizer(s)",normalizers.count);
+        if (normalizers) {
+            for (SQLJSONTransformer *t in normalizers) {
+                self.dict = [t transform:self.dict];
+            }
         }
+        LOGD(@"Processed %d normalizer(s)",normalizers.count);
+        self.normalized = true;
+        return self.dict;
     }
-    LOGD(@"Processed %d normalizer(s) result is %@",normalizers.count,self.dict);
-
-    return self.dict;
+    
 }
 
 @end
