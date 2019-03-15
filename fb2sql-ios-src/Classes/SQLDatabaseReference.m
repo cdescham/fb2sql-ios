@@ -10,6 +10,7 @@
 #import "SQLDatabaseEventType.h"
 #import "SQLDatabaseEntity.h"
 #import "SQLJSONTransformer.h"
+#import "SQLDatabaseSnapshot.h"
 
 @implementation SQLDatabaseReference
 
@@ -21,11 +22,11 @@
 
 -(SQLDatabaseReference *) child:(NSString *)label {
     if (!self.table)
-    self.table = label;
+        self.table = label;
     else if (!self.pk)
-    self.pk = label;
+        self.pk = label;
     else
-    LOGA(@"Child call too many times. Maximum time is 2, child(<table>).child(<primary key>)");
+        LOGA(@"Child call too many times. Maximum time is 2, child(<table>).child(<primary key>)");
     return self;
 }
 
@@ -52,7 +53,7 @@
 
 -(SQLDatabaseReference *) timestampStartAt:(NSDate *)date {
     if (!self.pivotfield)
-    LOGA(@"timestampStartAt called but no column defined by orderByChildDesc prior to this call");
+        LOGA(@"timestampStartAt called but no column defined by orderByChildDesc prior to this call");
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat: @"yyyy-MM-dd%%20HH:mm:ss"];
     [self addParameter:[NSString stringWithFormat:@"%@%%5Bafter%%5D",self.pivotfield] value:[formatter stringFromDate:date]];
@@ -61,7 +62,7 @@
 
 -(SQLDatabaseReference *) timestampEndtAt:(NSDate *)date {
     if (!self.pivotfield)
-    LOGA(@"timestampStartAt called but no column defined by orderByChildDesc prior to this call");
+        LOGA(@"timestampStartAt called but no column defined by orderByChildDesc prior to this call");
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat: @"yyyy-MM-dd%%20HH:mm:ss"];
     [self addParameter:[NSString stringWithFormat:@"%@%%5Bbeforer%%5D",self.pivotfield] value:[formatter stringFromDate:date]];
@@ -70,25 +71,47 @@
 
 -(SQLDatabaseReference *) equalTo:(NSString *)value {
     if (!self.pivotfield)
-    LOGA(@"timestampStartAt called but no column defined by orderByChildDesc prior to this call");
+        LOGA(@"timestampStartAt called but no column defined by orderByChildDesc prior to this call");
     [self addParameter:self.pivotfield  value:value];
     return self;
 }
 
 -(SQLDatabaseReference *) whereEquals:(NSString *)property value:(NSString *)value {
     if (!self.pivotfield)
-    LOGA(@"timestampStartAt called but no column defined by orderByChildDesc prior to this call");
+        LOGA(@"timestampStartAt called but no column defined by orderByChildDesc prior to this call");
     [self addParameter:property value:value];
     return self;
 }
 
 
 - (void)observeSingleEvent:(SQLDatabaseEventType)type withBlock:(void (^)(SQLDatabaseSnapshot *snapshot))block {
-    [SQLDatabaseApiPlatformStore.sharedManager get:self.table pk:self.pk geoSearch:self.geoSearch parameters:self.parameters block:block];
+    [SQLDatabaseApiPlatformStore.sharedManager get:self.table pk:self.pk geoSearch:self.geoSearch parameters:self.parameters block:block cancelBlock:nil];
+}
+
+- (void)observeSingleEventOfType:(SQLDatabaseEventType)eventType withBlock:(void (^)(SQLDatabaseSnapshot *snapshot))block withCancelBlock:(nullable void (^)(NSError* error))cancelBlock {
+    [SQLDatabaseApiPlatformStore.sharedManager get:self.table pk:self.pk geoSearch:self.geoSearch parameters:self.parameters block:block cancelBlock:cancelBlock];
+}
+
+-(SQLDatabaseReference *) queryAtLocation:(CLLocation *)location withRadius:(double)radius  andDistanceunit:(NSString *)unit {
+    self.geoSearch = [NSString stringWithFormat:@"geo_search/%lf/%lf/%lf%@",location.coordinate.latitude,location.coordinate.longitude,radius,unit];
+    return self;
+}
+
+-(void) addGeoQueryEventObserverBlock:(nullable void (^)(SQLDatabaseSnapshot* snap))observe withCompletionBlock:(nullable void (^)(void))completion withErrorBlock:(nullable void (^)(NSError* error))erroBlock {
+    [SQLDatabaseApiPlatformStore.sharedManager get:self.table pk:self.pk geoSearch:self.geoSearch parameters:self.parameters block:^(SQLDatabaseSnapshot* snap) {
+        for (SQLDatabaseSnapshot *s in [snap children]) {
+            observe(s);
+        }
+        completion();
+    } cancelBlock:erroBlock];
+}
+
+- (void) updateChildValues:(NSDictionary *)values withDenormalizers:(NSArray<SQLJSONTransformer *> *)denorm withCompletionBlock:(void (^)(NSError *__nullable error))block {
+    [self setValue:values withDenormalizers:denorm withCompletionBlock:block];
 }
 
 - (void) updateChildValues:(NSDictionary *)values withCompletionBlock:(void (^)(NSError *__nullable error))block {
-    
+    [self setValue:values withDenormalizers:nil withCompletionBlock:block];
 }
 
 /*
@@ -98,56 +121,29 @@
  - NSArray
  */
 
-- (void) setValue:(NSDictionary *)value forRootEntity:(NSString *)className withCompletionBlock:(void (^)(NSError *__nullable error))block {
+- (void) setValue:(NSDictionary *)value withDenormalizers:(NSArray<SQLJSONTransformer *> *)denorm withCompletionBlock:(void (^)(NSError *__nullable error))block {
     if (value) {
         NSDictionary *input;
-        if (className) {
-            NSMutableDictionary *d = [value mutableCopy];
-            Class c =NSClassFromString(className);
-            if ([c isKindOfClass:SQLDatabaseEntity.class]) {
-                NSArray *denormalizers = [c getDeNormalizers];
-                for (SQLJSONTransformer *t in denormalizers) {
-                    d = [t transform:d];
-                }
+        NSMutableDictionary *d = [value mutableCopy];
+        if (denorm) {
+            for (SQLJSONTransformer *t in denorm) {
+                d = [t transform:d];
             }
-            input = d;
-        } else
-        input = value;
+        }
+        input = d;
         if (self.pk)
-        	[SQLDatabaseApiPlatformStore.sharedManager update:self.table pk:self.pk json:input block:block insertOn404:true];
+            [SQLDatabaseApiPlatformStore.sharedManager update:self.table pk:self.pk json:input block:block insertOn404:true];
         else
-        	[SQLDatabaseApiPlatformStore.sharedManager insert:self.table json:input block:block];
+            [SQLDatabaseApiPlatformStore.sharedManager insert:self.table json:input block:block];
     }
     else {
         [SQLDatabaseApiPlatformStore.sharedManager remove:self.table pk:self.pk block:block];
     }
 }
 
-/*
- @PublicApi
- public Task<Void> setValue(@Nullable Object object) throws Exception {
- final TaskCompletionSource<Void> source = new TaskCompletionSource<>();
- if (object != null) {
- List<SQLJSONTransformer> deNormalizers = getDenormalizerForClass(object.getClass());
- String json = new Gson().toJson(object);
- Map<String, Object> bouncedUpdate = CustomClassMapper.convertToPlainJavaTypes(JsonMapper.parseJson(json));
- String pkName = table.substring(0, table.length() - 1)+"Id";
- if (bouncedUpdate.get(pkName) == null)
- bouncedUpdate.put(pkName,id);
- if (deNormalizers != null) {
- bouncedUpdate = deNormalize(bouncedUpdate, deNormalizers);
- json = new Gson().toJson(bouncedUpdate);
- }
- if (id == null)
- SQLApiPlatformStore.insert(table, json, source);
- else
- SQLApiPlatformStore.update(table, id, json, source, true);
- } else {
- SQLApiPlatformStore.delete(table, id, source);
- }
- return source.getTask();
- }
- */
+-(void) removeValue {
+    [SQLDatabaseApiPlatformStore.sharedManager remove:self.table pk:self.pk block:nil];
+}
 
 
 @end

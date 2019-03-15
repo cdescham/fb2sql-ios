@@ -47,8 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(SQLDatabase *) setUri:(NSString *)uri;
 -(SQLDatabaseReference *) reference;
 +(NSString *) getIdFromIri:(NSString *)IRI;
-+(NSString *) buildUriForProperty:(NSString *)property withCalue:(NSString *)value;
-
++(NSString *) buildUriForProperty:(NSString *)property withValue:(NSString *)value;
++(NSString *) generateID;
 @end
 
 NS_ASSUME_NONNULL_END

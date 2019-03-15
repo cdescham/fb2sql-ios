@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BlockVector : NSObject
 
 @property (nonatomic) void (^okBlock) (SQLDatabaseSnapshot*);
+@property (nonatomic) void (^cancelBlock) (NSError *);
 
 
 @end

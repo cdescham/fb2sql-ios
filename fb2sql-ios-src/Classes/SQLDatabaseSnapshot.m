@@ -67,4 +67,8 @@
     
 }
 
+-(id) value {
+    return [self value:nil];
+}
+
 @end

@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)initWithDictionary:(NSMutableDictionary *)dict andTable:(NSString *)table;
 -(id) value:(NSArray<SQLJSONTransformer *> *)normalizers;
+-(id) value;
+
 -(NSEnumerator<SQLDatabaseSnapshot *>*) children;
 -(BOOL) exists;
 
