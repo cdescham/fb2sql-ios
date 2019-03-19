@@ -27,7 +27,7 @@
 	
 	NSMutableArray *listOfKeys = [[NSMutableArray alloc] init];
 	for (NSDictionary *sublist in list) {
-		[listOfKeys addObject:[super idFromIRI:[sublist objectForKey:self.key]]];
+		[listOfKeys addObject:[SQLDatabase getIdFromIri:[sublist objectForKey:self.key]]];
 	}
 	[output setObject:listOfKeys forKey:self.property];
 	return output;

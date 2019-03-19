@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(id) value;
 
 -(NSEnumerator<SQLDatabaseSnapshot *>*) children;
+-(NSEnumerator<SQLDatabaseSnapshot *>*) reversedChildren;
+
 -(BOOL) exists;
 
 @end

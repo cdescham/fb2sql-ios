@@ -7,6 +7,7 @@
 //
 
 #import "SQLJSONNameMapperTransformer.h"
+#import "SQLDatabase.h"
 
 @implementation SQLJSONNameMapperTransformer
 
@@ -18,6 +19,9 @@
 }
 
 -(NSMutableDictionary *) transform:(NSMutableDictionary *) input {
+    LOGD(@"SQLJSONNameMapperTransformer %@ %@ %@",self.key,self.property,input);
+    if (![input objectForKey:self.property])
+        return input;
 	NSMutableDictionary * output = [input mutableCopy];
 	[output setObject:[input objectForKey:self.property] forKey:self.key];
 	return output;

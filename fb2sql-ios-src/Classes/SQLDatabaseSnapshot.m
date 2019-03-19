@@ -10,6 +10,7 @@
 #import "SQLDatabaseEntity.h"
 #import "SQLJSONTransformer.h"
 #import "SQLDatabase.h"
+#import "SQLJSONCommonNormalizer.h"
 
 @implementation SQLDatabaseSnapshot
 
@@ -18,16 +19,26 @@
     self.dict = dict;
     self.table = table;
     self.normalized = NO;
+    self.key = self.dict ? [SQLDatabase getIdFromIri:[self.dict objectForKey:@"@id"]] : nil;
     return self;
 }
 
 
--(NSEnumerator<SQLDatabaseSnapshot *>*) children {
+-(NSEnumerator<SQLDatabaseSnapshot *>*) children:(BOOL) reverseOrder {
     NSMutableArray *children = [[NSMutableArray alloc] init];
     for (NSDictionary *child in [self.dict objectForKey:@"hydra:member"]) {
         [children addObject:[[SQLDatabaseSnapshot alloc] initWithDictionary:child andTable:self.table]];
     }
-    return [children objectEnumerator];
+    return reverseOrder ? [children reverseObjectEnumerator] : [children objectEnumerator];
+}
+
+
+-(NSEnumerator<SQLDatabaseSnapshot *>*) children {
+    return [self children:false];
+}
+
+-(NSEnumerator<SQLDatabaseSnapshot *>*) reversedChildren {
+    return [self children:true];
 }
 
 
@@ -48,19 +59,17 @@
  */
 
 -(id) value:(NSArray<SQLJSONTransformer *> *)normalizers {
-    
     @synchronized (self.dict) {
         if (self.normalized)
             return self.dict;
         
-        self.key = [self.dict objectForKey:[[self.table substringToIndex:self.table.length-1] stringByAppendingString:@"Id"]];
-        LOGD(@"Processing %d normalizer(s)",normalizers.count);
+        SQLJSONCommonNormalizer *common = [[SQLJSONCommonNormalizer alloc] init];
+        self.dict = [common transform:self.dict];
         if (normalizers) {
             for (SQLJSONTransformer *t in normalizers) {
                 self.dict = [t transform:self.dict];
             }
         }
-        LOGD(@"Processed %d normalizer(s)",normalizers.count);
         self.normalized = true;
         return self.dict;
     }

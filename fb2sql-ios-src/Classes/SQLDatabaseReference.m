@@ -20,6 +20,11 @@
     return self;
 }
 
+-(SQLDatabaseReference *) keepCache:(BOOL)keep {
+    self.keep = keep;
+    return self;
+}
+
 -(SQLDatabaseReference *) child:(NSString *)label {
     if (!self.table)
         self.table = label;
@@ -55,7 +60,7 @@
     if (!self.pivotfield)
         LOGA(@"timestampStartAt called but no column defined by orderByChildDesc prior to this call");
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat: @"yyyy-MM-dd%%20HH:mm:ss"];
+    [formatter setDateFormat: @"yyyy-MM-dd%20HH:mm:ss"];
     [self addParameter:[NSString stringWithFormat:@"%@%%5Bafter%%5D",self.pivotfield] value:[formatter stringFromDate:date]];
     return self;
 }
@@ -64,8 +69,8 @@
     if (!self.pivotfield)
         LOGA(@"timestampStartAt called but no column defined by orderByChildDesc prior to this call");
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat: @"yyyy-MM-dd%%20HH:mm:ss"];
-    [self addParameter:[NSString stringWithFormat:@"%@%%5Bbeforer%%5D",self.pivotfield] value:[formatter stringFromDate:date]];
+    [formatter setDateFormat: @"yyyy-MM-dd%20HH:mm:ss"];
+    [self addParameter:[NSString stringWithFormat:@"%@%%5Bbefore%%5D",self.pivotfield] value:[formatter stringFromDate:date]];
     return self;
 }
 
@@ -113,6 +118,11 @@
 - (void) updateChildValues:(NSDictionary *)values withCompletionBlock:(void (^)(NSError *__nullable error))block {
     [self setValue:values withDenormalizers:nil withCompletionBlock:block];
 }
+
+- (void) updateChildValues:(NSDictionary *)values{
+    [self setValue:values withDenormalizers:nil withCompletionBlock:nil];
+}
+
 
 /*
  - NSString -- @"Hello World"

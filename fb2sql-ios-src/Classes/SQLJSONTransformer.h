@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SQLJSONTransformer : NSObject
 
 
--(NSString *)idFromIRI:(NSString *)iri;
-
 -(NSMutableDictionary *) transform:(NSMutableDictionary *) input;
 
 

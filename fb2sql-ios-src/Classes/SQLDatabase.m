@@ -92,11 +92,10 @@ static NSString *const PUSH_CHARS = @"-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcd
 
 
 +(NSString *) getIdFromIri:(NSString *)IRI {
+    if (!IRI || ![IRI hasPrefix:@"/api"])
+        return nil;
 	NSArray *components = [IRI componentsSeparatedByString:@"/"];
-	if (components.count == 3)
-		return components[2];
-	else
-		return nil;
+    return components[components.count-1];
 }
 
 +(NSString *) buildUriForProperty:(NSString *)property withValue:(NSString *)value {

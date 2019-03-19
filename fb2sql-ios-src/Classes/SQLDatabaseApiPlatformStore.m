@@ -91,14 +91,14 @@
 	[urlRequest setValue:ENCODING forHTTPHeaderField:@"charset"];
 	[urlRequest setValue:0 forHTTPHeaderField:@"Content-Length"];
 	[[SQLDatabaseApiPlatformStore.sharedManager.manager dataTaskWithRequest:urlRequest completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-		if (error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+		if (error && [httpResponse statusCode]!=404) {
 			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SQLDatabase.database.endPoint.retryTimeOut * NSEC_PER_SEC)), dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 				LOGD(@"[%@][read request retrying] %@",seq,point);
 				[self enqueueReadRequestForEndpointAndExpectedReturnCode:point expectedRC:expectedRC pk:pk table:table seq:seq];
 			});
 		} else {
 			NSError *jsonerror = nil;
-			NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
 			if ([httpResponse statusCode] == expectedRC) {
 				NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&jsonerror];
 				if (jsonerror == nil) {
@@ -113,7 +113,7 @@
 				}
 			} else {
 				NSError *e = [self errorForReason:@"wrong return code." code:[httpResponse statusCode]];
-				LOGD(@"[%@][read error - wrong status code] %@ %@",seq,point,e);
+				LOGE(@"[%@][read error - wrong status code] %@ %@",seq,point,e);
 				[self dispatchResults:false point:point andResult:nil error:e table:table];
 			}
 		}
