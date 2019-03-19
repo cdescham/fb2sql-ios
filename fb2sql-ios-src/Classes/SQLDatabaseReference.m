@@ -133,18 +133,16 @@
 
 - (void) setValue:(NSDictionary *)value withDenormalizers:(NSArray<SQLJSONTransformer *> *)denorm withCompletionBlock:(void (^)(NSError *__nullable error))block {
     if (value) {
-        NSDictionary *input;
         NSMutableDictionary *d = [value mutableCopy];
         if (denorm) {
             for (SQLJSONTransformer *t in denorm) {
                 d = [t transform:d];
             }
         }
-        input = d;
         if (self.pk)
-            [SQLDatabaseApiPlatformStore.sharedManager update:self.table pk:self.pk json:input block:block insertOn404:true];
+            [SQLDatabaseApiPlatformStore.sharedManager update:self.table pk:self.pk json:d block:block insertOn404:true];
         else
-            [SQLDatabaseApiPlatformStore.sharedManager insert:self.table json:input block:block];
+            [SQLDatabaseApiPlatformStore.sharedManager insert:self.table json:d block:block];
     }
     else {
         [SQLDatabaseApiPlatformStore.sharedManager remove:self.table pk:self.pk block:block];

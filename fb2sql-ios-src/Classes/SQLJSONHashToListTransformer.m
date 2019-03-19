@@ -23,7 +23,7 @@
 	NSMutableArray *result = [[NSMutableArray alloc]init];
 	NSDictionary  *elems =[input objectForKey:self.property];
 	for (NSString *k in [elems allKeys]) {
-		NSMutableDictionary * theObj = [elems objectForKey:k];
+		NSMutableDictionary * theObj = [[elems objectForKey:k] mutableCopy];
 		[theObj setObject:k forKey:self.key];
 		[result addObject:theObj];
 	}
