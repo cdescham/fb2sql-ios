@@ -24,6 +24,7 @@
         return input;
 	NSMutableDictionary * output = [input mutableCopy];
 	[output setObject:[input objectForKey:self.property] forKey:self.key];
+    [output removeObjectForKey:self.property];
 	return output;
 }
 
