@@ -20,7 +20,7 @@
 	}
 }
 
--(void) get:(NSString *)table pk:(NSString *)pk geoSearch:(NSString *)geoSearch parameters:(NSString *)parameters block:(void (^)(SQLDatabaseSnapshot *))block cancelBlock:(void (^)(NSError *))cancelBlock {
+-(void) get:(NSString *)table pk:(NSString *)pk geoSearch:(NSString *)geoSearch parameters:(NSString *)parameters block:(void (^)(SQLDatabaseSnapshot *))block cancelBlock:(nullable void (^)(NSError *))cancelBlock {
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSNumber *seq = self.getSeqNum;
 	NSString *point = nil;
