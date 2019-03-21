@@ -2,7 +2,7 @@
 //  SQLJSONNameMapperTransformer.m
 //  fb2sql
 //
-//  Created by Tof on 04/03/2019.
+//  Created by Christophe Deschamps on 04/03/2019.
 //  Copyright © 2019 Inventivelink. All rights reserved.
 //
 
@@ -19,7 +19,6 @@
 }
 
 -(NSMutableDictionary *) transform:(NSMutableDictionary *) input {
-    LOGD(@"SQLJSONNameMapperTransformer %@ %@ %@",self.key,self.property,input);
     if (![input objectForKey:self.property])
         return input;
 	NSMutableDictionary * output = [input mutableCopy];

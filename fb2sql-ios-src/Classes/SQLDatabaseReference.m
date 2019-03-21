@@ -2,7 +2,7 @@
 //  SQLDatabaseReference.m
 //  fb2sql
 //
-//  Created by Tof on 02/03/2019.
+//  Created by Christophe Deschamps on 02/03/2019.
 //  Copyright © 2019 Inventivelink. All rights reserved.
 //
 
@@ -82,8 +82,6 @@
 }
 
 -(SQLDatabaseReference *) whereEquals:(NSString *)property value:(NSString *)value {
-    if (!self.pivotfield)
-        LOGA(@"timestampStartAt called but no column defined by orderByChildDesc prior to this call");
     [self addParameter:property value:value];
     return self;
 }
@@ -124,6 +122,11 @@
 }
 
 
+- (void) setValue:(nullable NSDictionary *)values withCompletionBlock:(void (^)(NSError *__nullable error))block  {
+    [self setValue:values withDenormalizers:nil withCompletionBlock:block];
+}
+
+
 /*
  - NSString -- @"Hello World"
  - NSNumber (also includes boolean) -- @YES, @43, @4.333
@@ -138,6 +141,9 @@
             for (SQLJSONTransformer *t in denorm) {
                 d = [t transform:d];
             }
+        }
+        if (self.pk) {
+            [d setObject:self.pk forKey:[NSString stringWithFormat:@"%@Id",[self.table substringToIndex:self.table.length-1]]];
         }
         if (self.pk)
             [SQLDatabaseApiPlatformStore.sharedManager update:self.table pk:self.pk json:d block:block insertOn404:true];

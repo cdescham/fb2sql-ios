@@ -2,7 +2,7 @@
 //  SQLEntity.m
 //  SQLDatabase
 //
-//  Created by Tof on 06/03/2019.
+//  Created by Christophe Deschamps on 06/03/2019.
 //
 
 #import "SQLDatabaseEntity.h"

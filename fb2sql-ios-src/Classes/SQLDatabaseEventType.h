@@ -2,7 +2,7 @@
 //  SQLDatabaseEventType.h
 //  Pods
 //
-//  Created by Tof on 06/03/2019.
+//  Created by Christophe Deschamps on 06/03/2019.
 //
 
 #ifndef SQLDatabaseEventType_h

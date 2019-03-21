@@ -2,7 +2,7 @@
 //  SQLDatabaseApiPlatformStore.m
 //  fb2sql
 //
-//  Created by Tof on 02/03/2019.
+//  Created by Christophe Deschamps on 02/03/2019.
 //  Copyright © 2019 Inventivelink. All rights reserved.
 //
 
@@ -130,12 +130,13 @@
     [self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:jsonDict method:@"POST" expectedRC:201 table:table okBlock:block seq:seq];
 }
 
--(void) remove:(NSString *)table pk:(NSString *)pk okBlock:(void (^)(NSError *))okBlock {
+
+-(void) remove:(NSString *)table pk:(NSString *)pk block:(void (^)(NSError *))block {
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSString *point = [NSString stringWithFormat:@"%@/%@/%@",endPoint.uriString,table,pk];
     NSNumber *seq = self.getSeqNum;
     LOGD(@"[%@][remove request] %@",seq,point);
-    [self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:nil method:@"DELETE" expectedRC:304 table:table okBlock:okBlock seq:seq];
+    [self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:nil method:@"DELETE" expectedRC:304 table:table okBlock:block seq:seq];
 }
 
 

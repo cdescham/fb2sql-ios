@@ -2,7 +2,7 @@
 //  SQLDatabaseReference.h
 //  fb2sql
 //
-//  Created by Tof on 02/03/2019.
+//  Created by Christophe Deschamps on 02/03/2019.
 //  Copyright © 2019 Inventivelink. All rights reserved.
 //
 
@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) updateChildValues:(NSDictionary *)values withCompletionBlock:(void (^)(NSError *__nullable error))block;
 - (void) updateChildValues:(NSDictionary *)values;
 - (void) setValue:(NSDictionary *)value withDenormalizers:(NSArray<SQLJSONTransformer *> *)denorm withCompletionBlock:(void (^)(NSError *__nullable error))block;
+- (void) setValue:(nullable NSDictionary *)values withCompletionBlock:(void (^)(NSError *__nullable error))block;
 -(SQLDatabaseReference *) child:(NSString *)label;
 -(SQLDatabaseReference *) reference:(NSString *)table;
 -(SQLDatabaseReference *) limitToFirst:(int)limit;
@@ -42,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(SQLDatabaseReference *) timestampEndtAt:(NSDate *)date;
 -(SQLDatabaseReference *) orderByChildAsc:(NSString *)field;
 -(SQLDatabaseReference *) orderByChildDesc:(NSString *)field;
+-(SQLDatabaseReference *) whereEquals:(NSString *)property value:(NSString *)value;
 @end
 
 NS_ASSUME_NONNULL_END

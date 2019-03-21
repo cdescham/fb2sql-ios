@@ -2,7 +2,7 @@
 //  SQLJSONIRIBuilderTransformer.m
 //  fb2sql
 //
-//  Created by Tof on 04/03/2019.
+//  Created by Christophe Deschamps on 04/03/2019.
 //  Copyright © 2019 Inventivelink. All rights reserved.
 //
 
@@ -20,7 +20,9 @@
 
 -(NSMutableDictionary *) transform:(NSMutableDictionary *) input {
 	NSMutableDictionary * output = [input mutableCopy];
-	[output setObject:[NSString stringWithFormat:@"/api/%@s/%@",self.property,self.key] forKey:self.property];
+    if (![output objectForKey:self.key])
+        return output;
+	[output setObject:[NSString stringWithFormat:@"/api/%@s/%@",self.property,[output objectForKey:self.key]] forKey:self.property];
 	return output;
 }
 

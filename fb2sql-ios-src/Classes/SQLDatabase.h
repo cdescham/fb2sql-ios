@@ -2,7 +2,7 @@
 //  SQLDatabase.h
 //  fb2sql
 //
-//  Created by Tof on 01/03/2019.
+//  Created by Christophe Deschamps on 01/03/2019.
 //  Copyright © 2019 Inventivelink. All rights reserved.
 //
 
@@ -49,6 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *) getIdFromIri:(NSString *)IRI;
 +(NSString *) buildUriForProperty:(NSString *)property withValue:(NSString *)value;
 +(NSString *) generateID;
++ (NSString *) irize:(NSString *)prop  value:(NSString *)value;
 @end
 
 NS_ASSUME_NONNULL_END

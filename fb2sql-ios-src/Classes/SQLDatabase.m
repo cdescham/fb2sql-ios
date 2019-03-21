@@ -2,7 +2,7 @@
 //  SQLDatabase.m
 //  fb2sql
 //
-//  Created by Tof on 01/03/2019.
+//  Created by Christophe Deschamps on 01/03/2019.
 //  Copyright © 2019 Inventivelink. All rights reserved.
 //
 
@@ -29,8 +29,12 @@ static NSString *const PUSH_CHARS = @"-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcd
         shared = [[SQLDatabase alloc] init];
     });
     return shared;
-    
 }
+
++ (NSString *) irize:(NSString *)prop  value:(NSString *)value{
+    return [NSString stringWithFormat:@"/api/%@s/%@",prop,value];
+}
+
 
 - (SQLDatabaseReference *) reference {
 	return [[SQLDatabaseReference alloc] init];

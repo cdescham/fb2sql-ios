@@ -2,7 +2,7 @@
 //  SQLDatabaseEndPoint.h
 //  fb2sql
 //
-//  Created by Tof on 01/03/2019.
+//  Created by Christophe Deschamps on 01/03/2019.
 //  Copyright © 2019 Inventivelink. All rights reserved.
 //
 
