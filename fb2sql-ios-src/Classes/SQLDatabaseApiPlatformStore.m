@@ -56,7 +56,7 @@
 	[self enqueueReadRequestForEndpointAndExpectedReturnCode:point expectedRC:200 pk:pk table:table seq:seq];
 }
 
--(SQLDatabaseSnapshot *) dispatchResults:(BOOL)success point:(NSString *)point andResult:(NSDictionary *)result  error:(NSError *)error table:(NSString *)table{
+-(SQLDatabaseSnapshot *) dispatchResults:(BOOL)success point:(NSString *)point andResult:(NSMutableDictionary *)result  error:(NSError *)error table:(NSString *)table{
     SQLDatabaseSnapshot *snap = [[SQLDatabaseSnapshot alloc] initWithDictionary:success?result:nil andTable:table];
     @synchronized (blocksQueueForOngoingRequests) {
 		for (BlockVector *bv in [blocksQueueForOngoingRequests objectForKey:point]) {
@@ -100,7 +100,7 @@
 		} else {
 			NSError *jsonerror = nil;
 			if ([httpResponse statusCode] == expectedRC) {
-				NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&jsonerror];
+				NSMutableDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&jsonerror];
 				if (jsonerror == nil) {
                     SQLDatabaseSnapshot *snap =[self dispatchResults:true point:point andResult:result error:nil table:table];
 					if (SQLDatabase.database.endPoint.localCacheEnabled) {
@@ -175,7 +175,7 @@
 	}] resume];
 }
 
--(void) enqueueWriteRequestForEndpointAndExpectedReturnCode :(NSString *)point jsonDict:(NSDictionary *)jsonDict method:(NSString *)method expectedRC:(int)expectedRC  table:(NSString *)table okBlock:(void (^)(NSError *))okBlock seq:(NSString *)seq{
+-(void) enqueueWriteRequestForEndpointAndExpectedReturnCode :(NSString *)point jsonDict:(NSDictionary *)jsonDict method:(NSString *)method expectedRC:(int)expectedRC  table:(NSString *)table okBlock:(void (^)(NSError *))okBlock seq:(NSNumber *)seq{
 	NSURL *url =[NSURL URLWithString:point];
 	NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
 	NSData *requestData = jsonDict ? [NSJSONSerialization dataWithJSONObject:jsonDict options:0 error:nil] : nil;

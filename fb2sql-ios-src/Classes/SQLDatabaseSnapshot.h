@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *key;
 @property bool normalized;
 
-- (id)initWithDictionary:(NSMutableDictionary *)dict andTable:(NSString *)table;
+- (id)initWithDictionary:(NSMutableDictionary *)inputDict andTable:(NSString *)table;
 -(id) value:(NSArray<SQLJSONTransformer *> *)normalizers;
 -(id) value;
 

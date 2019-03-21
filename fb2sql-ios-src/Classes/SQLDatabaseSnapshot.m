@@ -14,9 +14,9 @@
 
 @implementation SQLDatabaseSnapshot
 
-- (id)initWithDictionary:(NSMutableDictionary *)dict andTable:(NSString *)table {
+- (id)initWithDictionary:(NSMutableDictionary *)inputDict andTable:(NSString *)table {
     self = [super init];
-    self.dict = dict;
+    self.dict = inputDict;
     self.table = table;
     self.normalized = NO;
     self.key = self.dict ? [SQLDatabase getIdFromIri:[self.dict objectForKey:@"@id"]] : nil;
@@ -26,7 +26,7 @@
 
 -(NSEnumerator<SQLDatabaseSnapshot *>*) children:(BOOL) reverseOrder {
     NSMutableArray *children = [[NSMutableArray alloc] init];
-    for (NSDictionary *child in [self.dict objectForKey:@"hydra:member"]) {
+    for (NSMutableDictionary *child in [self.dict objectForKey:@"hydra:member"]) {
         [children addObject:[[SQLDatabaseSnapshot alloc] initWithDictionary:child andTable:self.table]];
     }
     return reverseOrder ? [children reverseObjectEnumerator] : [children objectEnumerator];
@@ -45,18 +45,6 @@
 -(BOOL) exists {
     return self.dict != nil;
 }
-
-/**
- * Returns the contents of this data snapshot as native types.
- *
- * Data types returned:
- * + NSDictionary
- * + NSArray
- * + NSNumber (also includes booleans)
- * + NSString
- *
- * @return The data as a native object.
- */
 
 -(id) value:(NSArray<SQLJSONTransformer *> *)normalizers {
     @synchronized (self.dict) {
