@@ -131,7 +131,7 @@
 }
 
 
--(void) remove:(NSString *)table pk:(NSString *)pk block:(void (^)(NSError *))block {
+-(void) remove:(NSString *)table pk:(NSString *)pk block:(nullable void (^)(NSError *))block {
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSString *point = [NSString stringWithFormat:@"%@/%@/%@",endPoint.uriString,table,pk];
     NSNumber *seq = self.getSeqNum;

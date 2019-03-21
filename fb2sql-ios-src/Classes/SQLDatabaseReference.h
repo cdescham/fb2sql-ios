@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) updateChildValues:(NSDictionary *)values withDenormalizers:(NSArray<SQLJSONTransformer *> *)denorm withCompletionBlock:(void (^)(NSError *__nullable error))block;
 - (void) updateChildValues:(NSDictionary *)values withCompletionBlock:(void (^)(NSError *__nullable error))block;
 - (void) updateChildValues:(NSDictionary *)values;
-- (void) setValue:(NSDictionary *)value withDenormalizers:(nullable NSArray<SQLJSONTransformer *> *)denorm withCompletionBlock:(void (^)(NSError *__nullable error))block;
+- (void) setValue:(NSDictionary *)value withDenormalizers:(nullable NSArray<SQLJSONTransformer *> *)denorm withCompletionBlock:(nullable void (^)(NSError *__nullable error))block;
 - (void) setValue:(nullable NSDictionary *)values withCompletionBlock:(void (^)(NSError *__nullable error))block;
 -(SQLDatabaseReference *) child:(NSString *)label;
 -(SQLDatabaseReference *) reference:(NSString *)table;

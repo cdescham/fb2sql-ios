@@ -134,7 +134,7 @@
  - NSArray
  */
 
-- (void) setValue:(NSDictionary *)value withDenormalizers:(nullable NSArray<SQLJSONTransformer *> *)denorm withCompletionBlock:(void (^)(NSError *__nullable error))block {
+- (void) setValue:(NSDictionary *)value withDenormalizers:(nullable NSArray<SQLJSONTransformer *> *)denorm withCompletionBlock:(nullable void (^)(NSError *__nullable error))block {
     if (value) {
         NSMutableDictionary *d = [value mutableCopy];
         if (denorm) {
