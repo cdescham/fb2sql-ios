@@ -16,7 +16,18 @@
 	self = [super init];
 	self.property = property;
 	self.key = key;
+  self.filterProperty = nil;
+  self.filterValue = nil;
 	return self;
+}
+
+- (id)initWithProperty:(NSString *)property andKey:(NSString *)key filterOn:(NSString *)filterProperty filterValue:(int)filterValue {
+  self = [super init];
+  self.property = property;
+  self.key = key;
+  self.filterProperty = filterProperty;
+  self.filterValue = filterValue;
+  return self;
 }
 
 
@@ -27,7 +38,8 @@
 	
 	NSMutableArray *listOfKeys = [[NSMutableArray alloc] init];
 	for (NSDictionary *sublist in list) {
-		[listOfKeys addObject:[SQLDatabase getIdFromIri:[sublist objectForKey:self.key]]];
+    if (!self.filterProperty || ((NSNumber *)[sublist objectForKey:self.filterProperty]).integerValue!=self.filterValue)
+			[listOfKeys addObject:[SQLDatabase getIdFromIri:[sublist objectForKey:self.key]]];
 	}
 	[output setObject:listOfKeys forKey:self.property];
 	return output;

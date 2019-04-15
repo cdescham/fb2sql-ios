@@ -14,8 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property NSString *property;
 @property NSString *key;
+@property NSString *filterProperty;
+@property int filterValue;
 
 - (id)initWithProperty:(NSString *)property andKey:(NSString *)key;
+- (id)initWithProperty:(NSString *)property andKey:(NSString *)key filterOn:(NSString *)filterProperty filterValue:(int)filterValue;
+
 
 @end
 

@@ -188,7 +188,7 @@
 	[urlRequest setValue:[NSString stringWithFormat:@"%lu", jsonDict ? (unsigned long)[requestData length] : 0] forHTTPHeaderField:@"Content-Length"];
 	[[SQLDatabaseApiPlatformStore.sharedManager.manager dataTaskWithRequest:urlRequest completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-        LOGD(@"[%@][%@ response] %@ %d",seq,[method isEqualToString:@"POST"] ? @"insert" : @"delete",point,[httpResponse statusCode]);
+        LOGD(@"[%@][%@ response] %@ %d %@",seq,[method isEqualToString:@"POST"] ? @"insert" : @"delete",point,[httpResponse statusCode],[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
 		if (!error && [httpResponse statusCode] == expectedRC) {
 			dispatch_async(dispatch_get_main_queue(), ^{
 				if (okBlock)
