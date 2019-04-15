@@ -1,0 +1,6 @@
+make changes
+update tag version in SQLDatabase.podspec
+commit & push
+create same tag : git tag xyz
+push tag : git push --tags
+update repo : pod repo push --allow-warnings fb2sql-ios-podspec SQLDatabase.podspec 
