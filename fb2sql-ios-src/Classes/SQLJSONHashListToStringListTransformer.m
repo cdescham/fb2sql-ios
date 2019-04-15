@@ -17,7 +17,6 @@
 	self.property = property;
 	self.key = key;
   self.filterProperty = nil;
-  self.filterValue = nil;
 	return self;
 }
 
