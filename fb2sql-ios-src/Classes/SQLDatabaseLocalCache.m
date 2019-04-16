@@ -32,6 +32,7 @@
 		CacheObject *o = [[CacheObject alloc] init];
 		o.storedDate = [NSDate date];
 		o.snap = snap;
+    [self.cache setObject:o forKey:key];
 	}
 }
 

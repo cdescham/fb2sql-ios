@@ -34,6 +34,7 @@
 	if (endPoint.localCacheEnabled) {
 		SQLDatabaseSnapshot *snap = [SQLDatabaseLocalCache.instance get:point ttl:endPoint.localcacheTTL];
 		if (snap) {
+      LOGD(@"[%@][read response from cache] %@ %@",seq,point,snap.dict);
 			block(snap);
 			return;
 		}
@@ -162,6 +163,7 @@
 		if ([httpResponse statusCode] == 404 && insertOn404) {
             [self insert:table json:jsonDict block:block];
 		} else if (!error && [httpResponse statusCode] == 200) {
+      [SQLDatabaseLocalCache.instance clear];
 			dispatch_async(dispatch_get_main_queue(), ^{
 				if (block)
 					block(nil);
@@ -190,6 +192,7 @@
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         LOGD(@"[%@][%@ response] %@ %d %@",seq,[method isEqualToString:@"POST"] ? @"insert" : @"delete",point,[httpResponse statusCode],[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
 		if (!error && [httpResponse statusCode] == expectedRC) {
+      [SQLDatabaseLocalCache.instance clear];
 			dispatch_async(dispatch_get_main_queue(), ^{
 				if (okBlock)
 					okBlock(nil);
