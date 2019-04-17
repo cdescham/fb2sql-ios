@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SQLDatabase'
-  s.version          = '1.0.9'
+  s.version          = '1.0.10'
   s.summary          = 'Firebase api-like Wrapper for api-platform.'
 
 # This description is used to generate tags and improve search results.

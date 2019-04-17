@@ -137,7 +137,7 @@
 	NSString *point = [NSString stringWithFormat:@"%@/%@/%@",endPoint.uriString,table,pk];
     NSNumber *seq = self.getSeqNum;
     LOGD(@"[%@][remove request] %@",seq,point);
-    [self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:nil method:@"DELETE" expectedRC:304 table:table okBlock:block seq:seq];
+    [self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:nil method:@"DELETE" expectedRC:204 table:table okBlock:block seq:seq];
 }
 
 
