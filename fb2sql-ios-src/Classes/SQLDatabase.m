@@ -17,7 +17,7 @@ static NSString *const PUSH_CHARS = @"-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcd
 - (id)init {
     if (self = [super init]) {
         self.endPoint = [[SQLDatabaseEndPoint alloc] init];
-        self.lVerbosity = Warn;
+        self.lVerbosity = SQLDATABASEWarn;
     }
     return self;
 }
@@ -90,7 +90,7 @@ static NSString *const PUSH_CHARS = @"-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcd
 	NSString *str = [[NSString alloc] initWithFormat:format arguments:args];
 	NSLog(@"%@ %@",TAG,str);
 	va_end(args);
-	if (severity == Abort)
+	if (severity == SQLDATABASEAbort)
 		abort();
 }
 

@@ -22,11 +22,11 @@
 
 
 #define LOGV(level, ...) [SQLDatabase log:level format:__VA_ARGS__]
-#define LOGD(...) LOGV(Debug, __VA_ARGS__)
-#define LOGI(...) LOGV(Info, __VA_ARGS__)
-#define LOGW(...) LOGV(Warn, __VA_ARGS__)
-#define LOGE(...) LOGV(Error, __VA_ARGS__)
-#define LOGA(...) LOGV(Abort, __VA_ARGS__)
+#define LOGD(...) LOGV(SQLDATABASEDebug, __VA_ARGS__)
+#define LOGI(...) LOGV(SQLDATABASEInfo, __VA_ARGS__)
+#define LOGW(...) LOGV(SQLDATABASEWarn, __VA_ARGS__)
+#define LOGE(...) LOGV(SQLDATABASEError, __VA_ARGS__)
+#define LOGA(...) LOGV(SQLDATABASEAbort, __VA_ARGS__)
 
 NS_ASSUME_NONNULL_BEGIN
 
