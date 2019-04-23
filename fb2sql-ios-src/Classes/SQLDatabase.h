@@ -14,11 +14,11 @@
 
 
 #define TAG @"[SQLDATABASE]"
-#define Debug 0
-#define Info 1
-#define Warn 2
-#define Error 3
-#define Abort 4
+#define SQLDATABASEDebug 0
+#define SQLDATABASEInfo 1
+#define SQLDATABASEWarn 2
+#define SQLDATABASEError 3
+#define SQLDATABASEAbort 4
 
 
 #define LOGV(level, ...) [SQLDatabase log:level format:__VA_ARGS__]
