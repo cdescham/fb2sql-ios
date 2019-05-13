@@ -35,6 +35,12 @@
     return self;
 }
 
+
+-(SQLDatabaseReference *) setGroups:(NSString *)groups {
+	[self addParameter:@"groups%5B%5D" value:groups];
+	return self;
+}
+
 -(void) addParameter:(NSString *)key value:(NSObject *)value {
     self.parameters =self.parameters?  [NSString stringWithFormat:@"%@&%@=%@",self.parameters,key,value] : [NSString stringWithFormat:@"%@=%@",key,value];
 }

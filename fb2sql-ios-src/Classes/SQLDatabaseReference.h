@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(SQLDatabaseReference *) orderByChildAsc:(NSString *)field;
 -(SQLDatabaseReference *) orderByChildDesc:(NSString *)field;
 -(SQLDatabaseReference *) whereEquals:(NSString *)property value:(NSString *)value;
+-(SQLDatabaseReference *) setGroups:(NSString *)groups;
+
 @end
 
 NS_ASSUME_NONNULL_END

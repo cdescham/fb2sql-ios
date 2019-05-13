@@ -92,7 +92,9 @@
 	[urlRequest setValue:ENCODING forHTTPHeaderField:@"charset"];
 	[urlRequest setValue:0 forHTTPHeaderField:@"Content-Length"];
 	[[SQLDatabaseApiPlatformStore.sharedManager.manager dataTaskWithRequest:urlRequest completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+    NSString* errorResponse = error ? [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding] : nil;
+    LOGD(@"[%@][read http response] %@ code = %d, error=%@",seq,point,[httpResponse statusCode],errorResponse);
 		if (error && [httpResponse statusCode]!=404) {
 			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SQLDatabase.database.endPoint.retryTimeOut * NSEC_PER_SEC)), dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 				LOGD(@"[%@][read request retrying] %@",seq,point);
