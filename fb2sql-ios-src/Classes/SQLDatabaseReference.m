@@ -14,6 +14,12 @@
 
 @implementation SQLDatabaseReference
 
+- (id)init {
+	if (self = [super init]) {
+		self.keep = NO;
+	}
+	return self;
+}
 
 -(SQLDatabaseReference *) reference:(NSString *)table {
     self.table = table;
@@ -33,6 +39,13 @@
     else
         LOGA(@"Child call too many times. Maximum time is 2, child(<table>).child(<primary key>)");
     return self;
+}
+
+-(SQLDatabaseReference *) children:(NSArray *)labels {
+	for (NSString *k in labels) {
+		[self addParameter:[NSString stringWithFormat:@"%@Id%%5B%%5D",[self.table hasSuffix:@"s"] ? [self.table substringToIndex:self.table.length-1] : self.table] value:k];
+	}
+	return self;
 }
 
 
@@ -152,7 +165,7 @@
             [d setObject:self.pk forKey:[NSString stringWithFormat:@"%@Id",[self.table substringToIndex:self.table.length-1]]];
         }
         if (self.pk)
-            [SQLDatabaseApiPlatformStore.sharedManager update:self.table pk:self.pk json:d block:block insertOn404:true];
+            [SQLDatabaseApiPlatformStore.sharedManager update:self.table pk:self.pk json:d block:block insertOn404:true keepCache:self.keep];
         else
             [SQLDatabaseApiPlatformStore.sharedManager insert:self.table json:d block:block];
     }

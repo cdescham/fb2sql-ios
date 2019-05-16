@@ -25,16 +25,16 @@
 	NSNumber *seq = self.getSeqNum;
 	NSString *point = nil;
 	if (pk)
-        point =[NSString stringWithFormat:@"%@/%@/%@?%@",endPoint.uriString,table,pk,parameters ? : @""] ;
+		point =[NSString stringWithFormat:@"%@/%@/%@?%@",endPoint.uriString,table,pk,parameters ? : @""] ;
 	else if (geoSearch)
-        point =[NSString stringWithFormat:@"%@/%@/%@?%@",endPoint.uriString,table,geoSearch,parameters ? : @""] ;
+		point =[NSString stringWithFormat:@"%@/%@/%@?%@",endPoint.uriString,table,geoSearch,parameters ? : @""] ;
 	else
-        point =[NSString stringWithFormat:@"%@/%@?%@",endPoint.uriString,table,parameters? : @""];
+		point =[NSString stringWithFormat:@"%@/%@?%@",endPoint.uriString,table,parameters? : @""];
 	LOGD(@"[%@][read request] %@",seq,point);
 	if (endPoint.localCacheEnabled) {
 		SQLDatabaseSnapshot *snap = [SQLDatabaseLocalCache.instance get:point ttl:endPoint.localcacheTTL];
 		if (snap) {
-      LOGD(@"[%@][read response from cache] %@ %@",seq,point,snap.dict);
+			LOGD(@"[%@][read response from cache] %@ %@",seq,point,snap.dict);
 			block(snap);
 			return;
 		}
@@ -42,7 +42,7 @@
 	@synchronized (blocksQueueForOngoingRequests) {
 		BlockVector *bv = [[BlockVector alloc] init];
 		bv.okBlock = block;
-        bv.cancelBlock = cancelBlock;
+		bv.cancelBlock = cancelBlock;
 		NSMutableArray *waitingVectorsForRequest = [blocksQueueForOngoingRequests objectForKey:point];
 		if (waitingVectorsForRequest) {
 			[waitingVectorsForRequest addObject:bv];
@@ -58,18 +58,18 @@
 }
 
 -(SQLDatabaseSnapshot *) dispatchResults:(BOOL)success point:(NSString *)point andResult:(NSMutableDictionary *)result  error:(NSError *)error table:(NSString *)table{
-    SQLDatabaseSnapshot *snap = [[SQLDatabaseSnapshot alloc] initWithDictionary:success?result:nil andTable:table];
-    @synchronized (blocksQueueForOngoingRequests) {
+	SQLDatabaseSnapshot *snap = [[SQLDatabaseSnapshot alloc] initWithDictionary:success?result:nil andTable:table];
+	@synchronized (blocksQueueForOngoingRequests) {
 		for (BlockVector *bv in [blocksQueueForOngoingRequests objectForKey:point]) {
 			dispatch_async(dispatch_get_main_queue(), ^{
-					if (success||bv.cancelBlock == nil)
-                        bv.okBlock(snap);
-                	else
-                        bv.cancelBlock(error);
+				if (success||bv.cancelBlock == nil)
+					bv.okBlock(snap);
+				else
+					bv.cancelBlock(error);
 			});
 		}
 		[blocksQueueForOngoingRequests removeObjectForKey:point];
-        return snap;
+		return snap;
 	}
 }
 
@@ -77,7 +77,7 @@
 	NSMutableDictionary * userInfo = [[NSMutableDictionary alloc] init];
 	[userInfo setObject:description forKey:@"description"];
 	[userInfo setObject:[NSNumber numberWithLong:code] forKey:@"code"];
-	NSError *e = [[NSError alloc] initWithDomain:@"FB2SQL" code:code userInfo:userInfo];
+	NSError *e = [[NSError alloc] initWithDomain:@"[SQLDATABASE]" code:code userInfo:userInfo];
 	return e;
 }
 
@@ -92,32 +92,28 @@
 	[urlRequest setValue:ENCODING forHTTPHeaderField:@"charset"];
 	[urlRequest setValue:0 forHTTPHeaderField:@"Content-Length"];
 	[[SQLDatabaseApiPlatformStore.sharedManager.manager dataTaskWithRequest:urlRequest completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-    NSString* errorResponse = error ? [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding] : nil;
-    LOGD(@"[%@][read http response] %@ code = %d, error=%@",seq,point,[httpResponse statusCode],errorResponse);
-		if (error && [httpResponse statusCode]!=404) {
-			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SQLDatabase.database.endPoint.retryTimeOut * NSEC_PER_SEC)), dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-				LOGD(@"[%@][read request retrying] %@",seq,point);
-				[self enqueueReadRequestForEndpointAndExpectedReturnCode:point expectedRC:expectedRC pk:pk table:table seq:seq];
-			});
-		} else {
-			NSError *jsonerror = nil;
-			if ([httpResponse statusCode] == expectedRC) {
-				NSMutableDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&jsonerror];
-				if (jsonerror == nil) {
-                    SQLDatabaseSnapshot *snap =[self dispatchResults:true point:point andResult:result error:nil table:table];
-					if (SQLDatabase.database.endPoint.localCacheEnabled) {
-						[SQLDatabaseLocalCache.instance put:point value:snap];
-					}
-					LOGD(@"[%@][read response] %@ %@",seq,point,result);
-				} else {
-					LOGD(@"[%@][read error - json] %@ %@",seq,point,jsonerror);
-					[self dispatchResults:false point:point andResult:nil error:jsonerror table:table];
+		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+		NSString* errorResponse = error ? [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding] : nil;
+		LOGD(@"[%@][read http response] %@ code = %d, error=%@",seq,point,[httpResponse statusCode],errorResponse);
+		NSError *jsonerror = nil;
+		if (!error && [httpResponse statusCode] == expectedRC) {
+			NSMutableDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&jsonerror];
+			if (jsonerror == nil) {
+				SQLDatabaseSnapshot *snap =[self dispatchResults:true point:point andResult:result error:nil table:table];
+				if (SQLDatabase.database.endPoint.localCacheEnabled) {
+					[SQLDatabaseLocalCache.instance put:point value:snap];
 				}
+				LOGD(@"[%@][read response] %@ %@",seq,point,result);
 			} else {
-				NSError *e = [self errorForReason:@"wrong return code." code:[httpResponse statusCode]];
-				LOGE(@"[%@][read error - wrong status code] %@ %@",seq,point,e);
-				[self dispatchResults:false point:point andResult:nil error:e table:table];
+				LOGD(@"[%@][read error - json] %@ %@",seq,point,jsonerror);
+				[self dispatchResults:false point:point andResult:nil error:jsonerror table:table];
+			}
+		} else {
+			NSError *e = [self errorForReason:@"wrong return code." code:[httpResponse statusCode]];
+			LOGE(@"[%@][read error - wrong status code] %@ %@",seq,point,e);
+			SQLDatabaseSnapshot *snap = [self dispatchResults:false point:point andResult:nil error:e table:table];
+			if (SQLDatabase.database.endPoint.localCacheEnabled) {
+				[SQLDatabaseLocalCache.instance put:point value:snap];
 			}
 		}
 	}] resume];
@@ -125,30 +121,30 @@
 
 
 
--(void) insert:(NSString *)table json:(NSDictionary *)jsonDict block:(void (^)(NSError *))block {
+-(void) insert:(NSString *)table json:(NSDictionary *)jsonDict block:(void (^)(NSError *))block keepCache:(BOOL)keepCache{
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSString *point = [NSString stringWithFormat:@"%@/%@",endPoint.uriString,table];
-    NSNumber *seq = self.getSeqNum;
-    LOGD(@"[%@][insert request] %@ %@",seq,point,jsonDict);
-    [self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:jsonDict method:@"POST" expectedRC:201 table:table okBlock:block seq:seq];
+	NSNumber *seq = self.getSeqNum;
+	LOGD(@"[%@][insert request] %@ %@",seq,point,jsonDict);
+	[self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:jsonDict method:@"POST" expectedRC:201 table:table okBlock:block seq:seq keepCache:keepCache];
 }
 
 
--(void) remove:(NSString *)table pk:(NSString *)pk block:(nullable void (^)(NSError *))block {
+-(void) remove:(NSString *)table pk:(NSString *)pk block:(nullable void (^)(NSError *))block  keepCache:(BOOL)keepCache{
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSString *point = [NSString stringWithFormat:@"%@/%@/%@",endPoint.uriString,table,pk];
-    NSNumber *seq = self.getSeqNum;
-    LOGD(@"[%@][remove request] %@",seq,point);
-    [self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:nil method:@"DELETE" expectedRC:204 table:table okBlock:block seq:seq];
+	NSNumber *seq = self.getSeqNum;
+	LOGD(@"[%@][remove request] %@",seq,point);
+	[self enqueueWriteRequestForEndpointAndExpectedReturnCode:point jsonDict:nil method:@"DELETE" expectedRC:204 table:table okBlock:block seq:seq keepCache:keepCache];
 }
 
 
 
--(void) update:(NSString *)table pk:(NSString *)pk json:(NSDictionary *)jsonDict block:(void (^)(NSError *))block insertOn404:(BOOL)insertOn404{
+-(void) update:(NSString *)table pk:(NSString *)pk json:(NSDictionary *)jsonDict block:(void (^)(NSError *))block insertOn404:(BOOL)insertOn404 keepCache:(BOOL)keepCache{
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSString *point = [NSString stringWithFormat:@"%@/%@/%@",endPoint.uriString,table,pk];
-    NSNumber *seq = self.getSeqNum;
-    LOGD(@"[%@][update request] insertOn404=%d %@ %@",seq,insertOn404,point,jsonDict);
+	NSNumber *seq = self.getSeqNum;
+	LOGD(@"[%@][update request] insertOn404=%d %@ %@",seq,insertOn404,point,jsonDict);
 	NSURL *url =[NSURL URLWithString:point];
 	NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
 	NSData *requestData = [NSJSONSerialization dataWithJSONObject:jsonDict options:0 error:nil];
@@ -161,11 +157,12 @@
 	[urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[requestData length]] forHTTPHeaderField:@"Content-Length"];
 	[[SQLDatabaseApiPlatformStore.sharedManager.manager dataTaskWithRequest:urlRequest completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-        LOGD(@"[%@][update response] insertOn404=%d %@ %d",seq,insertOn404,point,[httpResponse statusCode]);
+		LOGD(@"[%@][update response] insertOn404=%d %@ %d",seq,insertOn404,point,[httpResponse statusCode]);
 		if ([httpResponse statusCode] == 404 && insertOn404) {
-            [self insert:table json:jsonDict block:block];
+			[self insert:table json:jsonDict block:block];
 		} else if (!error && [httpResponse statusCode] == 200) {
-      [SQLDatabaseLocalCache.instance clear];
+			if (!keepCache)
+				[SQLDatabaseLocalCache.instance clear];
 			dispatch_async(dispatch_get_main_queue(), ^{
 				if (block)
 					block(nil);
@@ -179,7 +176,7 @@
 	}] resume];
 }
 
--(void) enqueueWriteRequestForEndpointAndExpectedReturnCode :(NSString *)point jsonDict:(NSDictionary *)jsonDict method:(NSString *)method expectedRC:(int)expectedRC  table:(NSString *)table okBlock:(void (^)(NSError *))okBlock seq:(NSNumber *)seq{
+-(void) enqueueWriteRequestForEndpointAndExpectedReturnCode :(NSString *)point jsonDict:(NSDictionary *)jsonDict method:(NSString *)method expectedRC:(int)expectedRC  table:(NSString *)table okBlock:(void (^)(NSError *))okBlock seq:(NSNumber *)seq keepCache:(BOOL)keepCache{
 	NSURL *url =[NSURL URLWithString:point];
 	NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
 	NSData *requestData = jsonDict ? [NSJSONSerialization dataWithJSONObject:jsonDict options:0 error:nil] : nil;
@@ -192,9 +189,10 @@
 	[urlRequest setValue:[NSString stringWithFormat:@"%lu", jsonDict ? (unsigned long)[requestData length] : 0] forHTTPHeaderField:@"Content-Length"];
 	[[SQLDatabaseApiPlatformStore.sharedManager.manager dataTaskWithRequest:urlRequest completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-        LOGD(@"[%@][%@ response] %@ %d %@",seq,[method isEqualToString:@"POST"] ? @"insert" : @"delete",point,[httpResponse statusCode],[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+		LOGD(@"[%@][%@ response] %@ %d %@",seq,[method isEqualToString:@"POST"] ? @"insert" : @"delete",point,[httpResponse statusCode],[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
 		if (!error && [httpResponse statusCode] == expectedRC) {
-      [SQLDatabaseLocalCache.instance clear];
+			if (!keepCache)
+				[SQLDatabaseLocalCache.instance clear];
 			dispatch_async(dispatch_get_main_queue(), ^{
 				if (okBlock)
 					okBlock(nil);

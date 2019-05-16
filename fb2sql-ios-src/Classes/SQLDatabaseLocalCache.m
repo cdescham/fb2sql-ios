@@ -7,6 +7,7 @@
 //
 
 #import "SQLDatabaseLocalCache.h"
+#import "SQLDatabase.h"
 
 
 @interface CacheObject : NSObject
@@ -22,8 +23,15 @@
 -(SQLDatabaseSnapshot *) get:(NSString *)key ttl:(int)ttl{
 	@synchronized (self.cache) {
 		CacheObject *o = [self.cache objectForKey:key];
-		if (!o || o.storedDate.timeIntervalSinceNow > ttl) return nil;
-		else return o.snap;
+		if (!o) {
+			LOGD(@"[SQLDatabaseLocalCache] no cache entry for %@",key);
+			return nil;
+		}
+		if ( o.storedDate.timeIntervalSinceNow > ttl) {
+			LOGD(@"[SQLDatabaseLocalCache] entry expired %@",key);
+			return nil;
+		}
+		return o.snap;
 	}
 }
 
@@ -32,7 +40,8 @@
 		CacheObject *o = [[CacheObject alloc] init];
 		o.storedDate = [NSDate date];
 		o.snap = snap;
-    [self.cache setObject:o forKey:key];
+    	[self.cache setObject:o forKey:key];
+		LOGD(@"[SQLDatabaseLocalCache] inserting cache key : %@",key);
 	}
 }
 
@@ -49,6 +58,7 @@
 -(void)clear {
 	@synchronized (self.cache) {
 		[self.cache removeAllObjects];
+		LOGD(@"[SQLDatabaseLocalCache] cache cleared");
 	}
 }
 
