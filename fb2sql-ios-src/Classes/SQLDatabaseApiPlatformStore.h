@@ -26,8 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(SQLDatabaseApiPlatformStore *)sharedManager;
 -(void) get:(NSString *)table pk:(NSString *)pk geoSearch:(NSString *)geoSearch parameters:(NSString *)parameters block:(void (^)(SQLDatabaseSnapshot *))block cancelBlock:(nullable void (^)(NSError *))cancelBlock;
--(void) remove:(NSString *)table pk:(NSString *)pk block:(nullable void (^)(NSError *))block;
--(void) insert:(NSString *)table json:(NSDictionary *)jsonDict block:(void (^)(NSError *))block;
+-(void) remove:(NSString *)table pk:(NSString *)pk block:(nullable void (^)(NSError *))block  keepCache:(BOOL)keepCache;
+-(void) insert:(NSString *)table json:(NSDictionary *)jsonDict block:(void (^)(NSError *))block keepCache:(BOOL)keepCache;
 -(void) update:(NSString *)table pk:(NSString *)pk json:(NSDictionary *)jsonDict block:(void (^)(NSError *))block insertOn404:(BOOL)insertOn404 keepCache:(BOOL)keepCache;
 
 @end

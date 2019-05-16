@@ -111,10 +111,7 @@
 		} else {
 			NSError *e = [self errorForReason:@"wrong return code." code:[httpResponse statusCode]];
 			LOGE(@"[%@][read error - wrong status code] %@ %@",seq,point,e);
-			SQLDatabaseSnapshot *snap = [self dispatchResults:false point:point andResult:nil error:e table:table];
-			if (SQLDatabase.database.endPoint.localCacheEnabled) {
-				[SQLDatabaseLocalCache.instance put:point value:snap];
-			}
+			[self dispatchResults:false point:point andResult:nil error:e table:table];
 		}
 	}] resume];
 }
@@ -159,7 +156,7 @@
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
 		LOGD(@"[%@][update response] insertOn404=%d %@ %d",seq,insertOn404,point,[httpResponse statusCode]);
 		if ([httpResponse statusCode] == 404 && insertOn404) {
-			[self insert:table json:jsonDict block:block];
+			[self insert:table json:jsonDict block:block keepCache:keepCache];
 		} else if (!error && [httpResponse statusCode] == 200) {
 			if (!keepCache)
 				[SQLDatabaseLocalCache.instance clear];

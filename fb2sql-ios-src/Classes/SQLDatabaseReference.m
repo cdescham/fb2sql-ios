@@ -167,15 +167,15 @@
         if (self.pk)
             [SQLDatabaseApiPlatformStore.sharedManager update:self.table pk:self.pk json:d block:block insertOn404:true keepCache:self.keep];
         else
-            [SQLDatabaseApiPlatformStore.sharedManager insert:self.table json:d block:block];
+            [SQLDatabaseApiPlatformStore.sharedManager insert:self.table json:d block:block keepCache:self.keep];
     }
     else {
-        [SQLDatabaseApiPlatformStore.sharedManager remove:self.table pk:self.pk block:block];
+        [SQLDatabaseApiPlatformStore.sharedManager remove:self.table pk:self.pk block:block keepCache:self.keep];
     }
 }
 
 -(void) removeValue {
-    [SQLDatabaseApiPlatformStore.sharedManager remove:self.table pk:self.pk block:nil];
+    [SQLDatabaseApiPlatformStore.sharedManager remove:self.table pk:self.pk block:nil keepCache:self.keep];
 }
 
 
