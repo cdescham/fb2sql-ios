@@ -24,12 +24,13 @@
 	SQLDatabaseEndPoint *endPoint = [SQLDatabase database].endPoint;
 	NSNumber *seq = self.getSeqNum;
 	NSString *point = nil;
+  NSString *parametersString = parameters ? [NSString stringWithFormat:@"?%@",parameters] : @"";
 	if (pk)
-		point =[NSString stringWithFormat:@"%@/%@/%@?%@",endPoint.uriString,table,pk,parameters ? : @""] ;
+		point =[NSString stringWithFormat:@"%@/%@/%@%@",endPoint.uriString,table,pk,parametersString ? : @""] ;
 	else if (geoSearch)
-		point =[NSString stringWithFormat:@"%@/%@/%@?%@",endPoint.uriString,table,geoSearch,parameters ? : @""] ;
+		point =[NSString stringWithFormat:@"%@/%@/%@%@",endPoint.uriString,table,geoSearch,parametersString ? : @""] ;
 	else
-		point =[NSString stringWithFormat:@"%@/%@?%@",endPoint.uriString,table,parameters? : @""];
+		point =[NSString stringWithFormat:@"%@/%@%@",endPoint.uriString,table,parametersString? : @""];
 	LOGD(@"[%@][read request] %@",seq,point);
 	if (endPoint.localCacheEnabled) {
 		SQLDatabaseSnapshot *snap = [SQLDatabaseLocalCache.instance get:point ttl:endPoint.localcacheTTL];
@@ -91,6 +92,7 @@
 	[urlRequest setValue:[SQLDatabase database].endPoint.authToken forHTTPHeaderField:@"X-AUTH-TOKEN"];
 	[urlRequest setValue:ENCODING forHTTPHeaderField:@"charset"];
 	[urlRequest setValue:0 forHTTPHeaderField:@"Content-Length"];
+
 	[[SQLDatabaseApiPlatformStore.sharedManager.manager dataTaskWithRequest:urlRequest completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
 		NSString* errorResponse = error ? [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding] : nil;
@@ -149,9 +151,11 @@
 	[urlRequest setHTTPMethod:@"PUT"];
 	[urlRequest setValue:MEDIA_TYPE forHTTPHeaderField:@"Accept"];
 	[urlRequest setValue:MEDIA_TYPE forHTTPHeaderField:@"Content-Type"];
+
 	[urlRequest setValue:[SQLDatabase database].endPoint.authToken forHTTPHeaderField:@"X-AUTH-TOKEN"];
 	[urlRequest setValue:ENCODING forHTTPHeaderField:@"charset"];
 	[urlRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[requestData length]] forHTTPHeaderField:@"Content-Length"];
+  NSLog(@"cdes > %@", [[NSString alloc] initWithData:urlRequest.HTTPBody encoding:NSUTF8StringEncoding] );
 	[[SQLDatabaseApiPlatformStore.sharedManager.manager dataTaskWithRequest:urlRequest completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
 		LOGD(@"[%@][update response] insertOn404=%d %@ %d",seq,insertOn404,point,[httpResponse statusCode]);
@@ -215,6 +219,8 @@
 		[shared.manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
 		[shared.manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
 		[shared.manager.requestSerializer setValue:MEDIA_TYPE forHTTPHeaderField:@"Content-Type"];
+    [shared.manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+
 		[shared.manager setTaskDidReceiveAuthenticationChallengeBlock:^NSURLSessionAuthChallengeDisposition(NSURLSession * _Nonnull session, NSURLSessionTask * _Nonnull task, NSURLAuthenticationChallenge * _Nonnull challenge, NSURLCredential *__autoreleasing  _Nullable * _Nullable credential) {
 			NSString *authenicationMethod = challenge.protectionSpace.authenticationMethod;
 			if ([authenicationMethod isEqualToString:NSURLAuthenticationMethodHTTPDigest]) {
